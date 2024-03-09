@@ -1,0 +1,1 @@
+Set-PSReadLineOption -EditMode Vi -HistoryNoDuplicates -HistorySearchCursorMovesToEnd -BellStyle None -WordDelimiters ' /\{}():""<>,.;~!@#$%^&*|+=[]' -HistorySearchCaseSensitive -PredictionSource History
