@@ -143,7 +143,7 @@ vim.cmd("set foldcolumn=0")
 vim.cmd("set guicursor=n-v-c-i:block")
 vim.cmd("filetype on")
 vim.cmd("let g:netrw_banner = 0")
-vim.cmd("colorscheme kanagawa")
+vim.cmd("colorscheme gruvbox")
 
 -- END
 
