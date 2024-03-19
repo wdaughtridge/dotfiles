@@ -135,15 +135,15 @@ vim.keymap.set("i", "<C-g>", "<Esc>gt")
 vim.keymap.set("i", "<C-f>", "<Esc>gT")
 vim.keymap.set("t", "<C-g>", "<C-\\><C-n>gt")
 vim.keymap.set("t", "<C-f>", "<C-\\><C-n>gT")
+vim.keymap.set("n", "<leader>nt", "<cmd>FloatermToggle<CR>")
 
 -- VIM CMD
 
 vim.cmd("set completeopt-=preview")
 vim.cmd("set foldcolumn=0")
-vim.cmd("set guicursor=n-v-c-i:block")
 vim.cmd("filetype on")
 vim.cmd("let g:netrw_banner = 0")
-vim.cmd("colorscheme tokyonight-night")
+vim.cmd("colorscheme kanagawa-dragon")
 vim.cmd("set background=dark")
 
 -- END

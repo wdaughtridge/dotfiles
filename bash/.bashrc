@@ -2,6 +2,10 @@
 
 export PATH=/Users/wdaughtridge/go/bin:/opt/homebrew/lib/ruby/gems/3.2.0/bin:/opt/homebrew/opt/ruby/bin:$PATH
 
+if [ -f $HOME/.kube/corp.workload-01.yaml ]; then
+    export KUBECONFIG=$HOME/.kube/corp.workload-01.yaml
+fi
+
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(zoxide init bash)"
 
