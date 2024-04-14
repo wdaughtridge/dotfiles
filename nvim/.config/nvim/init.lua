@@ -1,3 +1,4 @@
+vim.lsp.set_log_level("debug")
 
 vim.opt.mouse = ""
 
@@ -12,6 +13,24 @@ end)
 vim.keymap.set("n", "K", function()
     vim.lsp.buf.hover()
 end)
+
+--       --
+-- Swift --
+--       --
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = "*.swift",
+    callback = function()
+        local root_dir = vim.fs.dirname(
+            vim.fs.find({ '*.xcodeproj', '.git', 'ContentView.swift' }, { upward = true })[1]
+        )
+        local client = vim.lsp.start({
+            name = 'xcrun',
+            cmd = { 'sourcekit-lsp' },
+            root_dir = root_dir,
+        })
+        vim.lsp.buf_attach_client(0, client)
+    end
+})
 
 --    --
 -- Go --
@@ -62,11 +81,9 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
-
 vim.opt.smartindent = true
 
 vim.opt.wrap = false
-
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
@@ -111,7 +128,6 @@ vim.keymap.set("n", "<leader>te", ":tabedit ")
 vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 
 vim.keymap.set("n", "Q", "<nop>")
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
@@ -121,9 +137,6 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
-
-vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>");
-vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
 
 vim.keymap.set("n", "K", vim.lsp.buf.hover)
 vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help)
@@ -139,11 +152,13 @@ vim.keymap.set("n", "<leader>nt", "<cmd>FloatermToggle<CR>")
 
 -- VIM CMD
 
+vim.cmd("let g:floaterm_width=0.9")
+vim.cmd("let g:floaterm_height=0.9")
 vim.cmd("set completeopt-=preview")
 vim.cmd("set foldcolumn=0")
 vim.cmd("filetype on")
-vim.cmd("let g:netrw_banner = 0")
-vim.cmd("colorscheme kanagawa-dragon")
-vim.cmd("set background=dark")
+vim.cmd("let g:netrw_banner=0")
+vim.cmd("let g:netrw_list_hide='\\(^\\|\\s\\s\\)\\zs\\.\\S\\+'")
+vim.cmd("colorscheme tokyonight-night")
 
 -- END
