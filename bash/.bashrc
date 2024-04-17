@@ -19,8 +19,6 @@ source /Users/wdaughtridge/.config/bash/git-completion.bash
 
 export PS1="\[\033[01;34m\]\w\[\033[00m\]\$(__git_ps1 ' \[\033[01;33m\](%s)\[\033[00m\]')\$ "
 
-export TERM="xterm-color"
-
 __fzf_edit__() {
     file="$(fzf --preview 'bat --color=always {}')"
     if [[ -n $file ]]; then
@@ -28,9 +26,9 @@ __fzf_edit__() {
     fi
 }
 
-bind -m emacs-standard -x '"\C-f": echo $(fzf --preview "bat --color=always {}")'
-bind -m vi-command -x '"\C-f": echo $(fzf --preview "bat --color=always {}")'
-bind -m vi-insert -x '"\C-f": echo $(fzf --preview "bat --color=always {}")'
+bind -m emacs-standard -x '"\C-f": ~/.local/bin/tmux-sessionizer'
+bind -m vi-command -x '"\C-f": ~/.local/bin/tmux-sessionizer'
+bind -m vi-insert -x '"\C-f": ~/.local/bin/tmux-sessionizer'
 
 bind -m emacs-standard -x '"\C-e": __fzf_edit__'
 bind -m vi-command -x '"\C-e": __fzf_edit__'
