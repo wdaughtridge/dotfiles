@@ -2,10 +2,6 @@
 
 export PATH=/Users/wdaughtridge/go/bin:/opt/homebrew/lib/ruby/gems/3.2.0/bin:/opt/homebrew/opt/ruby/bin:$PATH
 
-if [ -f $HOME/.kube/corp.workload-01.yaml ]; then
-    export KUBECONFIG=$HOME/.kube/corp.workload-01.yaml
-fi
-
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(zoxide init bash)"
 
@@ -30,6 +26,10 @@ bind -m emacs-standard -x '"\C-f": ~/.local/bin/tmux-sessionizer'
 bind -m vi-command -x '"\C-f": ~/.local/bin/tmux-sessionizer'
 bind -m vi-insert -x '"\C-f": ~/.local/bin/tmux-sessionizer'
 
+bind -m emacs-standard -x '"\C-k": ~/.local/bin/tmux-kubeit'
+bind -m vi-command -x '"\C-k": ~/.local/bin/tmux-kubeit'
+bind -m vi-insert -x '"\C-k": ~/.local/bin/tmux-kubeit'
+
 bind -m emacs-standard -x '"\C-e": __fzf_edit__'
 bind -m vi-command -x '"\C-e": __fzf_edit__'
 bind -m vi-insert -x '"\C-e": __fzf_edit__'
@@ -45,3 +45,5 @@ alias k=kubectl
 alias cd=z
 alias f=fzf
 alias e=__fzf_edit__
+
+export BAT_THEME="ansi"
