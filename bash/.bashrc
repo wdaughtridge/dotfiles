@@ -22,6 +22,10 @@ __fzf_edit__() {
     fi
 }
 
+bind -m emacs-standard -x '"\C-t": ~/.local/bin/tmux-terminal-sessionizer'
+bind -m vi-command -x '"\C-t": ~/.local/bin/tmux-terminal-sessionizer'
+bind -m vi-insert -x '"\C-t": ~/.local/bin/tmux-terminal-sessionizer'
+
 bind -m emacs-standard -x '"\C-f": ~/.local/bin/tmux-sessionizer'
 bind -m vi-command -x '"\C-f": ~/.local/bin/tmux-sessionizer'
 bind -m vi-insert -x '"\C-f": ~/.local/bin/tmux-sessionizer'
@@ -47,3 +51,6 @@ alias f=fzf
 alias e=__fzf_edit__
 
 export BAT_THEME="ansi"
+export VIRTUAL_ENV_DISABLE_PROMPT="true"
+
+source /Users/wdaughtridge/.devpy/bin/activate

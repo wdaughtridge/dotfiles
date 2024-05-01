@@ -13,7 +13,7 @@ colorscheme retrobox
 syntax enable
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
-set foldcolumn=4
+set foldcolumn=2
 set nu
 set rnu
 set ruler
@@ -126,3 +126,4 @@ nnoremap <C-f> gT
 nnoremap <C-g> gt
 
 hi Normal guibg=NONE ctermbg=NONE
+highlight clear FoldColumn
