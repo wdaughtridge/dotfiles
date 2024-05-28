@@ -472,7 +472,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'pkl', 'helm', 'yaml', 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'go', 'c_sharp' },
+      ensure_installed = { 'pkl', 'helm', 'yaml', 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'go', 'c_sharp', 'dockerfile', 'xml' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {

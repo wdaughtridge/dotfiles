@@ -1,6 +1,6 @@
 [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 
-export PATH=/Users/wdaughtridge/go/bin:/opt/homebrew/lib/ruby/gems/3.2.0/bin:/opt/homebrew/opt/ruby/bin:$PATH
+export PATH=/Users/wdaughtridge/go/bin:/opt/homebrew/lib/ruby/gems/3.2.0/bin:/opt/homebrew/opt/ruby/bin:/Users/wdaughtridge/.local/bin/nvim-macos/bin:$PATH
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(zoxide init bash)"
@@ -18,7 +18,7 @@ export PS1="\[\033[01;34m\]\w\[\033[00m\]\$(__git_ps1 ' \[\033[01;33m\](%s)\[\03
 __fzf_edit__() {
     file="$(fzf --preview 'bat --color=always {}')"
     if [[ -n $file ]]; then
-        nvim -p $file
+        nvim -p "$file"
     fi
 }
 
@@ -49,6 +49,8 @@ alias k=kubectl
 alias cd=z
 alias f=fzf
 alias e=__fzf_edit__
+alias latestcommit="git log --oneline | head -n 1 | cut -d' ' -f2-"
+alias so="source $HOME/.bashrc"
 
 export BAT_THEME="ansi"
 export VIRTUAL_ENV_DISABLE_PROMPT="true"
