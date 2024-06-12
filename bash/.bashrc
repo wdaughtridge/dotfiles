@@ -1,6 +1,8 @@
 [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 
-export PATH=/Users/wdaughtridge/go/bin:/opt/homebrew/lib/ruby/gems/3.2.0/bin:/opt/homebrew/opt/ruby/bin:/Users/wdaughtridge/.local/bin/nvim-macos/bin:$PATH
+export DOTNET_ROOT=/usr/local/share/dotnet
+
+export PATH=/Users/wdaughtridge/go/bin:/opt/homebrew/lib/ruby/gems/3.2.0/bin:/opt/homebrew/opt/ruby/bin:/Users/wdaughtridge/.local/bin/nvim-macos/bin:$HOME/.config/emacs/bin:$PATH
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(zoxide init bash)"
@@ -56,3 +58,32 @@ export BAT_THEME="ansi"
 export VIRTUAL_ENV_DISABLE_PROMPT="true"
 
 source /Users/wdaughtridge/.devpy/bin/activate
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+if [ -n "$TMUX" ]; then
+    SESH="$(tmux display-message -p '#S')"
+    HISTFILE="$HOME/.bash_history.$SESH"
+    shopt -s histappend
+    PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
+fi
+
+echo -en "\e]P0222222" #black
+echo -en "\e]P8272822" #darkgrey
+echo -en "\e]P1aa4450" #darkred
+echo -en "\e]P9ff6a6a" #red
+echo -en "\e]P2719611" #darkgreen
+echo -en "\e]PAb1d631" #green
+echo -en "\e]P3ff9800" #brown
+echo -en "\e]PB87875f" #yellow
+echo -en "\e]P46688aa" #darkblue
+echo -en "\e]PC90b0d1" #blue
+echo -en "\e]P58f6f8f" #darkmagenta
+echo -en "\e]PD8181a6" #magenta
+echo -en "\e]P6528b8b" #darkcyan
+echo -en "\e]PE87ceeb" #cyan
+echo -en "\e]P7d3d3d3" #lightgrey
+echo -en "\e]PFc1cdc1" #white
+clear #for background artifacting

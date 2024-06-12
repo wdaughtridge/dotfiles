@@ -216,6 +216,9 @@ require('lazy').setup({
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+
+          vim.keymap.set('i', '<C-s>', vim.lsp.buf.signature_help, { buffer = event.buf, desc = 'LSP: Show Signature Help' })
+
           -- Opens a popup that displays documentation about the word under your cursor
           -- See `:help K` for why this keymap.
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
@@ -249,7 +252,6 @@ require('lazy').setup({
       --  For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local util = require 'lspconfig.util'
       local servers = {
-        clangd = {},
         gopls = {},
         pyright = {},
         powershell_es = {},
@@ -257,8 +259,6 @@ require('lazy').setup({
         bashls = {},
         -- omnisharp = {},
         csharp_ls = {},
-        yamlls = {},
-        puppet = {},
         lua_ls = {
           settings = {
             Lua = {
@@ -446,13 +446,6 @@ require('lazy').setup({
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
     'folke/tokyonight.nvim',
-    opts = {
-      transparent = true,
-      styles = {
-        sidebars = 'transparent',
-        floats = 'transparent',
-      },
-    },
     priority = 1000, -- Make sure to load this before all the other start plugins.
     init = function()
       -- Load the colorscheme here.
