@@ -49,9 +49,7 @@ alias ll="ls -l"
 alias vim=nvim
 alias k=kubectl
 alias cd=z
-alias f=fzf
-alias e=__fzf_edit__
-alias latestcommit="git log --oneline | head -n 1 | cut -d' ' -f2-"
+alias lcommit="git log --oneline | head -n 1 | cut -d' ' -f2-"
 alias so="source $HOME/.bashrc"
 alias ta="tmux a"
 
@@ -70,4 +68,5 @@ if [ -n "$TMUX" ]; then
     shopt -s histappend
     PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 fi
+
 . "$HOME/.cargo/env"
