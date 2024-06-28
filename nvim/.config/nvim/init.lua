@@ -63,7 +63,12 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',    opts = {} },
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
   {
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
@@ -143,7 +148,9 @@ require('lazy').setup({
           map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
           map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-          vim.keymap.set('i', '<C-s>', vim.lsp.buf.signature_help, { buffer = event.buf, desc = 'LSP: Show Signature Help' })
+          vim.keymap.set('i', '<C-s>', vim.lsp.buf.signature_help,
+            { buffer = event.buf, desc = 'LSP: Show Signature Help' })
+          map('<leader>f', vim.lsp.buf.format, '[F]ormat')
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
         end,
@@ -271,7 +278,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'pkl', 'helm', 'yaml', 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'go', 'c_sharp', 'dockerfile', 'xml' },
+      ensure_installed = { 'helm', 'yaml', 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'go', 'c_sharp', 'dockerfile', 'xml' },
       auto_install = true,
       highlight = {
         enable = true,
