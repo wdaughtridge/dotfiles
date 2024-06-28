@@ -27,6 +27,9 @@ vim.opt.hlsearch = false
 vim.opt.incsearch = true
 vim.opt.tabstop = 4
 vim.opt.autoread = true
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
 vim.cmd 'filetype on'
 
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
@@ -60,7 +63,6 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  { 'tpope/vim-sleuth' },
   { 'numToStr/Comment.nvim', opts = {} },
   {
     'nvim-telescope/telescope.nvim',

@@ -38,10 +38,6 @@ setopt EXTENDED_HISTORY
 bindkey '\e[A' history-search-backward
 bindkey '\e[B' history-search-forward
 
-# GENERAL
-
-# (bonus: Disable sound errors in Zsh)
-
 # never beep
 setopt NO_BEEP
 
