@@ -31,6 +31,7 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.cmd 'filetype on'
+vim.api.nvim_create_user_command('E', 'Oil', {})
 
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
@@ -46,6 +47,7 @@ vim.keymap.set('t', '<C-f>', '<C-\\><C-n>gT')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', '<leader>X', ':read !<C-r>0<CR>')
+vim.keymap.set('n', '<leader>bd', vim.cmd.bdelete)
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
@@ -251,11 +253,24 @@ require('lazy').setup({
     end,
   },
   {
+    'navarasu/onedark.nvim',
+    priority = 1000,
+    init = function()
+      vim.cmd.hi 'Comment gui=none'
+      vim.cmd.colorscheme 'onedark'
+    end,
+    config = function()
+      require('onedark').setup {
+        style = 'darker'
+      }
+    end
+  },
+  {
     'ellisonleao/gruvbox.nvim',
     priority = 1000,
     init = function()
       vim.cmd.hi 'Comment gui=none'
-      vim.cmd.colorscheme 'gruvbox'
+      -- vim.cmd.colorscheme 'gruvbox'
     end,
   },
   {
