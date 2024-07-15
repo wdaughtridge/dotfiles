@@ -4,10 +4,10 @@ set -gx GOBIN $GOPATH/bin
 
 # Python
 set -gx VIRTUAL_ENV_DISABLE_PROMPT "YES"
-source /Users/wdaughtridge/.devpy/bin/activate.fish
+source ~/.devpy/bin/activate.fish
 
 # PATH
-set -gx PATH /opt/homebrew/lib/ruby/gems/3.2.0/bin /opt/homebrew/opt/ruby/bin /opt/homebrew/bin /opt/homebrew/sbin $GOBIN $PATH
+set -gx PATH ~/.config/emacs/bin ~/.dotnet/tools /opt/homebrew/lib/ruby/gems/3.2.0/bin /opt/homebrew/opt/ruby/bin /opt/homebrew/bin /opt/homebrew/sbin $GOBIN $PATH
 
 # Abbreviations
 abbr -a vim nvim

@@ -32,6 +32,7 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.cmd 'filetype on'
 vim.api.nvim_create_user_command('E', 'Oil', {})
+vim.cmd 'au BufRead,BufNewFile *.yaml set filetype=helm'
 
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
@@ -66,6 +67,17 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
   { 'numToStr/Comment.nvim',    opts = {} },
+  {
+    'nvim-orgmode/orgmode',
+    event = 'VeryLazy',
+    ft = { 'org' },
+    config = function()
+      require('orgmode').setup({
+        org_agenda_files = '~/repos/org/**/*',
+        org_default_notes_file = '~/repos/org/refile.org',
+      })
+    end,
+  },
   {
     'stevearc/oil.nvim',
     opts = {},
