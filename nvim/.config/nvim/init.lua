@@ -1,6 +1,8 @@
 vim.api.nvim_create_user_command('Q', 'q', {})
 vim.api.nvim_create_user_command('W', 'w', {})
 
+vim.cmd 'colorscheme default'
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = false
@@ -269,7 +271,7 @@ require('lazy').setup({
     priority = 1000,
     init = function()
       vim.cmd.hi 'Comment gui=none'
-      vim.cmd.colorscheme 'onedark'
+      -- vim.cmd.colorscheme 'onedark'
     end,
     config = function()
       require('onedark').setup {
