@@ -7,7 +7,7 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "restore_on_startup": "none",
+  "autosave": "on_window_change",
   "buffer_font_family": "0xProto Nerd Font Mono",
   "theme": "Ayu Dark",
   "relative_line_numbers": true,
@@ -19,12 +19,12 @@
   "buffer_font_size": 16,
   "confirm_quit": true,
   "cursor_blink": false,
+  "wrap_guides": [128],
   "scrollbar": {
     "show": "never"
   },
-  "tab_bar": {
-    "show_nav_history_buttons": false
-  },
+  "vertical_scroll_margin": 8,
+  "show_call_status_icon": false,
   "vim": {
     "use_system_clipboard": "on_yank"
   }
