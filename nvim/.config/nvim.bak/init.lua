@@ -1,7 +1,7 @@
 vim.api.nvim_create_user_command('Q', 'q', {})
 vim.api.nvim_create_user_command('W', 'w', {})
 
-vim.cmd 'colorscheme retrobox'
+vim.cmd 'colorscheme default'
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -33,7 +33,7 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.cmd 'filetype on'
--- vim.api.nvim_create_user_command('E', 'Oil', {})
+vim.api.nvim_create_user_command('E', 'Oil', {})
 vim.cmd 'au BufRead,BufNewFile *.yaml set filetype=helm'
 
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
@@ -69,22 +69,22 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
   { 'numToStr/Comment.nvim',    opts = {} },
-  -- {
-  --   'nvim-orgmode/orgmode',
-  --   event = 'VeryLazy',
-  --   ft = { 'org' },
-  --   config = function()
-  --     require('orgmode').setup({
-  --       org_agenda_files = '~/repos/org/**/*',
-  --       org_default_notes_file = '~/repos/org/refile.org',
-  --     })
-  --   end,
-  -- },
-  -- {
-  --   'stevearc/oil.nvim',
-  --   opts = {},
-  --   dependencies = { "nvim-tree/nvim-web-devicons" },
-  -- },
+  {
+    'nvim-orgmode/orgmode',
+    event = 'VeryLazy',
+    ft = { 'org' },
+    config = function()
+      require('orgmode').setup({
+        org_agenda_files = '~/repos/org/**/*',
+        org_default_notes_file = '~/repos/org/refile.org',
+      })
+    end,
+  },
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
   {
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
@@ -147,7 +147,7 @@ require('lazy').setup({
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       { 'j-hui/fidget.nvim', opts = {} },
-      { 'folke/lazydev.nvim', opts = {} },
+      { 'folke/neodev.nvim', opts = {} },
     },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -175,6 +175,7 @@ require('lazy').setup({
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
       local servers = {
         gopls = {},
+        pyright = {},
         powershell_es = {
           settings = {
             powershell = { codeFormatting = { Preset = 'OTBS' } },
@@ -265,42 +266,42 @@ require('lazy').setup({
       }
     end,
   },
-  -- {
-  --   'navarasu/onedark.nvim',
-  --   priority = 1000,
-  --   init = function()
-  --     vim.cmd.hi 'Comment gui=none'
-  --     -- vim.cmd.colorscheme 'onedark'
-  --   end,
-  --   config = function()
-  --     require('onedark').setup {
-  --       style = 'darker'
-  --     }
-  --   end
-  -- },
-  -- {
-  --   'ellisonleao/gruvbox.nvim',
-  --   priority = 1000,
-  --   init = function()
-  --     vim.cmd.hi 'Comment gui=none'
-  --     -- vim.cmd.colorscheme 'gruvbox'
-  --   end,
-  -- },
-  -- {
-  --   'folke/tokyonight.nvim',
-  --   opts = {
-  --     transparent = true,
-  --     styles = {
-  --       sidebars = 'transparent',
-  --       floats = 'transparent',
-  --     },
-  --   },
-  --   priority = 1000,
-  --   init = function()
-  --     vim.cmd.hi 'Comment gui=none'
-  --     -- vim.cmd.colorscheme 'tokyonight-night'
-  --   end,
-  -- },
+  {
+    'navarasu/onedark.nvim',
+    priority = 1000,
+    init = function()
+      vim.cmd.hi 'Comment gui=none'
+      -- vim.cmd.colorscheme 'onedark'
+    end,
+    config = function()
+      require('onedark').setup {
+        style = 'darker'
+      }
+    end
+  },
+  {
+    'ellisonleao/gruvbox.nvim',
+    priority = 1000,
+    init = function()
+      vim.cmd.hi 'Comment gui=none'
+      -- vim.cmd.colorscheme 'gruvbox'
+    end,
+  },
+  {
+    'folke/tokyonight.nvim',
+    opts = {
+      transparent = true,
+      styles = {
+        sidebars = 'transparent',
+        floats = 'transparent',
+      },
+    },
+    priority = 1000,
+    init = function()
+      vim.cmd.hi 'Comment gui=none'
+      -- vim.cmd.colorscheme 'tokyonight-night'
+    end,
+  },
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
   {
     'nvim-treesitter/nvim-treesitter',
