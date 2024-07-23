@@ -33,7 +33,7 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.cmd 'filetype on'
--- vim.api.nvim_create_user_command('E', 'Oil', {})
+vim.api.nvim_create_user_command('E', 'Oil', {})
 vim.cmd 'au BufRead,BufNewFile *.yaml set filetype=helm'
 
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
@@ -68,6 +68,43 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
+  {
+    "tpope/vim-fugitive",
+    config = function()
+      vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+
+      local Fugitive = vim.api.nvim_create_augroup("Fugitive", {})
+
+      local autocmd = vim.api.nvim_create_autocmd
+      autocmd("BufWinEnter", {
+        group = Fugitive,
+        pattern = "*",
+        callback = function()
+          if vim.bo.ft ~= "fugitive" then
+            return
+          end
+
+          local bufnr = vim.api.nvim_get_current_buf()
+          local opts = { buffer = bufnr, remap = false }
+          vim.keymap.set("n", "<leader>p", function()
+            vim.cmd.Git('push')
+          end, opts)
+
+          -- rebase always
+          vim.keymap.set("n", "<leader>P", function()
+            vim.cmd.Git({ 'pull', '--rebase' })
+          end, opts)
+
+          -- NOTE: It allows me to easily set the branch i am pushing and any tracking
+          -- needed if i did not set the branch up correctly
+          vim.keymap.set("n", "<leader>t", ":Git push -u origin ", opts);
+        end,
+      })
+
+      vim.keymap.set("n", "gu", "<cmd>diffget //2<CR>")
+      vim.keymap.set("n", "gh", "<cmd>diffget //3<CR>")
+    end
+  },
   { 'numToStr/Comment.nvim',    opts = {} },
   -- {
   --   'nvim-orgmode/orgmode',
@@ -80,11 +117,11 @@ require('lazy').setup({
   --     })
   --   end,
   -- },
-  -- {
-  --   'stevearc/oil.nvim',
-  --   opts = {},
-  --   dependencies = { "nvim-tree/nvim-web-devicons" },
-  -- },
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
   {
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
@@ -146,7 +183,7 @@ require('lazy').setup({
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',  opts = {} },
       { 'folke/lazydev.nvim', opts = {} },
     },
     config = function()
@@ -182,7 +219,8 @@ require('lazy').setup({
         },
         terraformls = {},
         bashls = {},
-        csharp_ls = {},
+        -- csharp_ls = {},
+        omnisharp = {},
         lua_ls = {
           settings = {
             Lua = {

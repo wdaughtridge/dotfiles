@@ -17,16 +17,31 @@ function switch_to_repo
     commandline -f repaint
 end
 
+function switch_kubeconfig
+    set selected (find ~/.kube -name "*.yaml" -mindepth 1 -maxdepth 1 | fzf)
+    set -gx KUBECONFIG $selected
+    echo $KUBECONFIG
+    commandline -f repaint
+end
+
 # Abbreviations
 abbr -a vim nvim
 abbr -a k kubectl
 abbr -a ta tmux a
 abbr -a cl clear
+abbr -a erase_kubeconfig set -e KUBECONFIG
 
 # Key bindings
 bind \cf switch_to_repo
+bind \ck switch_kubeconfig
 
 function fish_prompt
+    if set -q KUBECONFIG
+        set kube_prompt "@" (basename $KUBECONFIG)
+    else
+        set -e kube_prompt
+    end
+
     set_color blue
-    echo (basename (pwd))(set_color cyan) '>' (set_color normal)
+    echo (basename (pwd))(set_color cyan) $kube_prompt '>' (set_color normal)
 end
