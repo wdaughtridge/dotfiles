@@ -2,9 +2,11 @@
 set -gx GOPATH /Users/wdaughtridge/go
 set -gx GOBIN $GOPATH/bin
 
-# Python
-set -gx VIRTUAL_ENV_DISABLE_PROMPT "YES"
-source ~/.devpy/bin/activate.fish
+if test -f ~/.devpy/bin/activate.fish
+    # Python
+    set -gx VIRTUAL_ENV_DISABLE_PROMPT "YES"
+    source ~/.devpy/bin/activate.fish
+end
 
 # PATH
 set -gx PATH ~/.config/emacs/bin ~/.dotnet/tools /opt/homebrew/lib/ruby/gems/3.2.0/bin /opt/homebrew/opt/ruby/bin /opt/homebrew/bin /opt/homebrew/sbin $GOBIN $PATH
@@ -20,7 +22,6 @@ end
 function switch_kubeconfig
     set selected (find ~/.kube -name "*.yaml" -mindepth 1 -maxdepth 1 | fzf)
     set -gx KUBECONFIG $selected
-    echo $KUBECONFIG
     commandline -f repaint
 end
 
@@ -42,6 +43,6 @@ function fish_prompt
         set -e kube_prompt
     end
 
-    set_color blue
+    set_color green
     echo (basename (pwd))(set_color cyan) $kube_prompt '>' (set_color normal)
 end

@@ -1,8 +1,6 @@
 vim.api.nvim_create_user_command('Q', 'q', {})
 vim.api.nvim_create_user_command('W', 'w', {})
 
-vim.cmd 'colorscheme retrobox'
-
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = false
@@ -51,6 +49,15 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', '<leader>X', ':read !<C-r>0<CR>')
 vim.keymap.set('n', '<leader>bd', vim.cmd.bdelete)
+vim.keymap.set('n', '<leader>tc', vim.cmd.tabclose)
+vim.keymap.set('n', '<leader>tn', vim.cmd.tabnew)
+vim.keymap.set('n', '<leader>~', vim.cmd.terminal)
+vim.keymap.set('n', '<leader>cf', vim.cmd.cfirst)
+vim.keymap.set('n', '<leader>cl', vim.cmd.clast)
+vim.keymap.set('n', '<leader>cn', vim.cmd.cnext)
+vim.keymap.set('n', '<leader>cp', vim.cmd.cprevious)
+vim.keymap.set('n', '<leader>cc', vim.cmd.cclose)
+vim.keymap.set('n', '<leader>co', vim.cmd.copen)
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
@@ -212,6 +219,7 @@ require('lazy').setup({
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
       local servers = {
         gopls = {},
+        helm_ls = {},
         powershell_es = {
           settings = {
             powershell = { codeFormatting = { Preset = 'OTBS' } },
@@ -308,7 +316,7 @@ require('lazy').setup({
   --   priority = 1000,
   --   init = function()
   --     vim.cmd.hi 'Comment gui=none'
-  --     -- vim.cmd.colorscheme 'onedark'
+  --     vim.cmd.colorscheme 'onedark'
   --   end,
   --   config = function()
   --     require('onedark').setup {
@@ -324,21 +332,21 @@ require('lazy').setup({
   --     -- vim.cmd.colorscheme 'gruvbox'
   --   end,
   -- },
-  -- {
-  --   'folke/tokyonight.nvim',
-  --   opts = {
-  --     transparent = true,
-  --     styles = {
-  --       sidebars = 'transparent',
-  --       floats = 'transparent',
-  --     },
-  --   },
-  --   priority = 1000,
-  --   init = function()
-  --     vim.cmd.hi 'Comment gui=none'
-  --     -- vim.cmd.colorscheme 'tokyonight-night'
-  --   end,
-  -- },
+  {
+    'folke/tokyonight.nvim',
+    opts = {
+      transparent = true,
+      styles = {
+        sidebars = 'transparent',
+        floats = 'transparent',
+      },
+    },
+    priority = 1000,
+    init = function()
+      vim.cmd.hi 'Comment gui=none'
+      vim.cmd.colorscheme 'tokyonight-night'
+    end,
+  },
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
   {
     'nvim-treesitter/nvim-treesitter',
