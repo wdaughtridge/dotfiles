@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =6
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/Users/wdaughtridge/repos/dotfiles'
 let g:netrw_dirhist_6='/Users/wdaughtridge/repos/hiera'
 let g:netrw_dirhist_5='/Users/wdaughtridge/repos/dotfiles/vim'
 let g:netrw_dirhist_4='/Users/wdaughtridge/repos/dotfiles'
@@ -9,4 +10,3 @@ let g:netrw_dirhist_1='/Users/wdaughtridge/repos/dotfiles'
 let g:netrw_dirhist_0='/Users/wdaughtridge/repos/dotfiles/bash'
 let g:netrw_dirhist_9='/Users/wdaughtridge/repos/dotfiles'
 let g:netrw_dirhist_8='/Users/wdaughtridge/repos/dotfiles/bash'
-let g:netrw_dirhist_7='/Users/wdaughtridge/repos/dotfiles/bash/.config'

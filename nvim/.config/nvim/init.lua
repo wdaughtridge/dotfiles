@@ -1,11 +1,11 @@
 vim.api.nvim_create_user_command('Q', 'q', {})
 vim.api.nvim_create_user_command('W', 'w', {})
 
-vim.cmd 'colorscheme retrobox'
+vim.cmd 'colorscheme wildcharm'
+vim.cmd 'hi Normal guibg=NONE ctermbg=NONE'
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-vim.g.have_nerd_font = false
 
 vim.opt.termguicolors = true
 vim.opt.number = true
@@ -33,7 +33,7 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.cmd 'filetype on'
--- vim.api.nvim_create_user_command('E', 'Oil', {})
+vim.api.nvim_create_user_command('E', 'Oil', {})
 vim.cmd 'au BufRead,BufNewFile *.yaml set filetype=helm'
 
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
@@ -45,12 +45,21 @@ vim.keymap.set('n', '<C-g>', 'gt')
 vim.keymap.set('n', '<C-f>', 'gT')
 vim.keymap.set('i', '<C-g>', '<Esc>gt')
 vim.keymap.set('i', '<C-f>', '<Esc>gT')
-vim.keymap.set('t', '<C-g>', '<C-\\><C-n>gt')
-vim.keymap.set('t', '<C-f>', '<C-\\><C-n>gT')
+-- vim.keymap.set('t', '<C-g>', '<C-\\><C-n>gt')
+-- vim.keymap.set('t', '<C-f>', '<C-\\><C-n>gT')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', '<leader>X', ':read !<C-r>0<CR>')
 vim.keymap.set('n', '<leader>bd', vim.cmd.bdelete)
+vim.keymap.set('n', '<leader>tc', vim.cmd.tabclose)
+vim.keymap.set('n', '<leader>tn', vim.cmd.tabnew)
+vim.keymap.set('n', '<leader>~', vim.cmd.terminal)
+vim.keymap.set('n', '<leader>cf', vim.cmd.cfirst)
+vim.keymap.set('n', '<leader>cl', vim.cmd.clast)
+vim.keymap.set('n', '<leader>cn', vim.cmd.cnext)
+vim.keymap.set('n', '<leader>cp', vim.cmd.cprevious)
+vim.keymap.set('n', '<leader>cc', vim.cmd.cclose)
+vim.keymap.set('n', '<leader>co', vim.cmd.copen)
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
@@ -68,23 +77,41 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  { 'numToStr/Comment.nvim',    opts = {} },
-  -- {
-  --   'nvim-orgmode/orgmode',
-  --   event = 'VeryLazy',
-  --   ft = { 'org' },
-  --   config = function()
-  --     require('orgmode').setup({
-  --       org_agenda_files = '~/repos/org/**/*',
-  --       org_default_notes_file = '~/repos/org/refile.org',
-  --     })
-  --   end,
-  -- },
-  -- {
-  --   'stevearc/oil.nvim',
-  --   opts = {},
-  --   dependencies = { "nvim-tree/nvim-web-devicons" },
-  -- },
+  {
+    "tpope/vim-fugitive",
+    config = function()
+      vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+      local Fugitive = vim.api.nvim_create_augroup("Fugitive", {})
+      local autocmd = vim.api.nvim_create_autocmd
+      autocmd("BufWinEnter", {
+        group = Fugitive,
+        pattern = "*",
+        callback = function()
+          if vim.bo.ft ~= "fugitive" then
+            return
+          end
+          local bufnr = vim.api.nvim_get_current_buf()
+          local opts = { buffer = bufnr, remap = false }
+          vim.keymap.set("n", "<leader>p", function()
+            vim.cmd.Git('push')
+          end, opts)
+          vim.keymap.set("n", "<leader>P", function()
+            vim.cmd.Git('pull')
+          end, opts)
+        end,
+      })
+      vim.keymap.set("n", "gu", "<cmd>diffget //2<CR>")
+      vim.keymap.set("n", "gh", "<cmd>diffget //3<CR>")
+    end
+  },
+  {
+    'numToStr/Comment.nvim', opts = {}
+  },
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
   {
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
@@ -111,10 +138,11 @@ require('lazy').setup({
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
       local builtin = require 'telescope.builtin'
-      vim.keymap.set('n', '<leader>gs', builtin.git_status, { desc = '[G]it [S]tatus' })
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>sf', function()
+        builtin.find_files { previewer = false }
+      end, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>gf', builtin.git_files, { desc = '[G]it [F]iles' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
@@ -136,7 +164,7 @@ require('lazy').setup({
         }
       end, { desc = '[S]earch [/] in Open Files' })
       vim.keymap.set('n', '<leader>sn', function()
-        builtin.find_files { cwd = vim.fn.stdpath 'config' }
+        builtin.find_files { cwd = vim.fn.stdpath 'config', previewer = false, }
       end, { desc = '[S]earch [N]eovim files' })
     end,
   },
@@ -146,7 +174,7 @@ require('lazy').setup({
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',  opts = {} },
       { 'folke/lazydev.nvim', opts = {} },
     },
     config = function()
@@ -175,6 +203,7 @@ require('lazy').setup({
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
       local servers = {
         gopls = {},
+        helm_ls = {},
         powershell_es = {
           settings = {
             powershell = { codeFormatting = { Preset = 'OTBS' } },
@@ -182,7 +211,7 @@ require('lazy').setup({
         },
         terraformls = {},
         bashls = {},
-        csharp_ls = {},
+        omnisharp = {},
         lua_ls = {
           settings = {
             Lua = {
@@ -265,54 +294,14 @@ require('lazy').setup({
       }
     end,
   },
-  -- {
-  --   'navarasu/onedark.nvim',
-  --   priority = 1000,
-  --   init = function()
-  --     vim.cmd.hi 'Comment gui=none'
-  --     -- vim.cmd.colorscheme 'onedark'
-  --   end,
-  --   config = function()
-  --     require('onedark').setup {
-  --       style = 'darker'
-  --     }
-  --   end
-  -- },
-  -- {
-  --   'ellisonleao/gruvbox.nvim',
-  --   priority = 1000,
-  --   init = function()
-  --     vim.cmd.hi 'Comment gui=none'
-  --     -- vim.cmd.colorscheme 'gruvbox'
-  --   end,
-  -- },
-  -- {
-  --   'folke/tokyonight.nvim',
-  --   opts = {
-  --     transparent = true,
-  --     styles = {
-  --       sidebars = 'transparent',
-  --       floats = 'transparent',
-  --     },
-  --   },
-  --   priority = 1000,
-  --   init = function()
-  --     vim.cmd.hi 'Comment gui=none'
-  --     -- vim.cmd.colorscheme 'tokyonight-night'
-  --   end,
-  -- },
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
       ensure_installed = { 'helm', 'yaml', 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'go', 'c_sharp', 'dockerfile', 'xml' },
       auto_install = true,
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = { 'ruby' },
-      },
-      indent = { enable = true, disable = { 'ruby' } },
+      highlight = { enable = true },
+      indent = { enable = true },
     },
     config = function(_, opts)
       ---@diagnostic disable-next-line: missing-fields
