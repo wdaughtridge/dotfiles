@@ -45,6 +45,8 @@ vim.keymap.set('n', '<C-g>', 'gt')
 vim.keymap.set('n', '<C-f>', 'gT')
 vim.keymap.set('i', '<C-g>', '<Esc>gt')
 vim.keymap.set('i', '<C-f>', '<Esc>gT')
+vim.keymap.set('i', '<C-t>', ':ToggleTerm<CR>')
+vim.keymap.set('n', '<C-t>', ':ToggleTerm<CR>')
 -- vim.keymap.set('t', '<C-g>', '<C-\\><C-n>gt')
 -- vim.keymap.set('t', '<C-f>', '<C-\\><C-n>gT')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
@@ -77,6 +79,13 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
+  {
+    'akinsho/toggleterm.nvim',
+    opts = {
+      direction = 'float',
+      start_in_insert = false,
+    },
+  },
   {
     "tpope/vim-fugitive",
     config = function()

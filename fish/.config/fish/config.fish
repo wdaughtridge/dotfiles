@@ -14,20 +14,24 @@ set -gx PATH ~/.config/emacs/bin ~/.dotnet/tools /opt/homebrew/lib/ruby/gems/3.2
 fzf --fish | source
 
 function switch_to_repo
-    set selected (find ~/repos -mindepth 1 -maxdepth 1 -type d | fzf)
+    set selected (find ~/repos -mindepth 1 -maxdepth 1 -type d | fzf || return 1)
     cd $selected
     commandline -f repaint
 end
 
 function switch_kubeconfig
-    set selected (find ~/.kube -name "*.yaml" -mindepth 1 -maxdepth 1 | fzf)
+    set selected (find ~/.kube -name "*.yaml" -mindepth 1 -maxdepth 1 | fzf || return 1)
     set -gx KUBECONFIG $selected
     commandline -f repaint
 end
 
+function toggle_fg_proc
+    fg 2&> /dev/null
+end
+
 # Abbreviations
 abbr -a vim nvim
-abbr -a k kubectl
+abbr -a k kubectl -n devops
 abbr -a ta tmux a
 abbr -a cl clear
 abbr -a erase_kubeconfig set -e KUBECONFIG
@@ -35,14 +39,15 @@ abbr -a erase_kubeconfig set -e KUBECONFIG
 # Key bindings
 bind \cf switch_to_repo
 bind \ck switch_kubeconfig
+bind \cz toggle_fg_proc
 
 function fish_prompt
     if set -q KUBECONFIG
-        set kube_prompt "@" (basename $KUBECONFIG)
+        set kube_prompt "@" (string replace ".yaml" "" (path basename $KUBECONFIG))
     else
         set -e kube_prompt
     end
 
     set_color green
-    echo (basename (pwd))(set_color cyan) $kube_prompt '>' (set_color normal)
+    echo (path basename (pwd))(set_color cyan) $kube_prompt '>' (set_color normal)
 end
