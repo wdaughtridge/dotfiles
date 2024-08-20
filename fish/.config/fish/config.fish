@@ -31,7 +31,7 @@ end
 
 # Abbreviations
 abbr -a vim nvim
-abbr -a k kubectl -n devops
+abbr -a k kubectl
 abbr -a ta tmux a
 abbr -a cl clear
 abbr -a erase_kubeconfig set -e KUBECONFIG
@@ -40,6 +40,7 @@ abbr -a erase_kubeconfig set -e KUBECONFIG
 bind \cf switch_to_repo
 bind \ck switch_kubeconfig
 bind \cz toggle_fg_proc
+bind \ct ~/.local/bin/tmux-terminal-sessionizer
 
 function fish_prompt
     if set -q KUBECONFIG
