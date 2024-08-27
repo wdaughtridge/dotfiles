@@ -47,8 +47,6 @@ vim.keymap.set('i', '<C-g>', '<Esc>gt')
 vim.keymap.set('i', '<C-f>', '<Esc>gT')
 vim.keymap.set('i', '<C-t>', ':ToggleTerm<CR>')
 vim.keymap.set('n', '<C-t>', ':ToggleTerm<CR>')
--- vim.keymap.set('t', '<C-g>', '<C-\\><C-n>gt')
--- vim.keymap.set('t', '<C-f>', '<C-\\><C-n>gT')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', '<leader>X', ':read !<C-r>0<CR>')
@@ -83,7 +81,6 @@ require('lazy').setup({
     'akinsho/toggleterm.nvim',
     opts = {
       direction = 'float',
-      start_in_insert = false,
     },
   },
   {

@@ -9,7 +9,7 @@
 {
   "autosave": "on_window_change",
   "buffer_font_family": "0xProto Nerd Font Mono",
-  "theme": "Gruvbox Light Hard",
+  "theme": "Gruvbox Dark Hard",
   "relative_line_numbers": true,
   "telemetry": {
     "metrics": false
