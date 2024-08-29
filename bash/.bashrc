@@ -44,6 +44,11 @@ bind -m emacs-standard -x '"\C-p": git pull'
 bind -m vi-command -x '"\C-p": git pull'
 bind -m vi-insert -x '"\C-p": git pull'
 
+function switch_kubeconfig () {
+    selected=$(find ~/.kube -name "*.yaml" -mindepth 1 -maxdepth 1 | fzf || return 1)
+    export KUBECONFIG="$selected"
+}
+
 alias ls="ls --color=auto"
 alias ll="ls -l"
 alias vim=nvim
