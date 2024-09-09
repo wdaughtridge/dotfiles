@@ -1,3 +1,5 @@
+fish_config theme choose "Dracula Official"
+
 # Go
 set -gx GOPATH /Users/wdaughtridge/go
 set -gx GOBIN $GOPATH/bin
@@ -41,6 +43,8 @@ bind \cf switch_to_repo
 bind \ck switch_kubeconfig
 bind \cz toggle_fg_proc
 bind \ct ~/.local/bin/tmux-terminal-sessionizer
+
+set -x BAT_THEME "Visual Studio Dark+"
 
 function fish_prompt
     if set -q KUBECONFIG

@@ -7,3 +7,5 @@ email = wdaughtridge@alarm.com
 editor = nvim
 [push]
 autoSetupRemote = true
+[maintenance]
+	repo = /Users/wdaughtridge/repos/puppet

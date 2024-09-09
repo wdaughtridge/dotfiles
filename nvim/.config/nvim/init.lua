@@ -1,7 +1,6 @@
 vim.api.nvim_create_user_command('Q', 'q', {})
 vim.api.nvim_create_user_command('W', 'w', {})
 
-vim.cmd 'colorscheme sorbet'
 vim.cmd 'hi Normal guibg=NONE ctermbg=NONE'
 
 vim.g.mapleader = ' '
@@ -78,6 +77,13 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
+  {
+    "Mofiqul/dracula.nvim",
+    priority = 100,
+    config = function ()
+      vim.cmd 'colorscheme dracula'
+    end
+  },
   {
     'akinsho/toggleterm.nvim',
     opts = {

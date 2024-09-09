@@ -8,9 +8,10 @@
 // from the command palette or from `Zed` application menu.
 {
   "autosave": "on_window_change",
-  "buffer_font_family": "0xProto Nerd Font Mono",
-  "theme": "Gruvbox Dark Hard",
+  "buffer_font_family": "MesloLGLDZ Nerd Font Mono",
+  "theme": "Dracula",
   "relative_line_numbers": true,
+  "buffer_line_height": "standard",
   "telemetry": {
     "metrics": false
   },
@@ -27,5 +28,12 @@
   "show_call_status_icon": false,
   "vim": {
     "use_system_clipboard": "on_yank"
+  },
+  "lsp": {
+    "powershell-es": {
+      "binary": {
+        "path": "/Users/wdaughtridge/.vscode/extensions/ms-vscode.powershell-2024.2.2/modules"
+      }
+    }
   }
 }
