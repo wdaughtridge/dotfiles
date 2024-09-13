@@ -32,7 +32,8 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.cmd 'filetype on'
-vim.api.nvim_create_user_command('E', 'Oil', {})
+-- vim.api.nvim_create_user_command('E', 'Oil', {})
+vim.api.nvim_create_user_command('E', 'Ex', {})
 vim.cmd 'au BufRead,BufNewFile *.yaml set filetype=helm'
 
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
@@ -80,7 +81,7 @@ require('lazy').setup({
   {
     "Mofiqul/dracula.nvim",
     priority = 100,
-    config = function ()
+    config = function()
       vim.cmd 'colorscheme dracula'
     end
   },
@@ -120,11 +121,11 @@ require('lazy').setup({
   {
     'numToStr/Comment.nvim', opts = {}
   },
-  {
-    'stevearc/oil.nvim',
-    opts = {},
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-  },
+  -- {
+  --   'stevearc/oil.nvim',
+  --   opts = {},
+  --   dependencies = { "nvim-tree/nvim-web-devicons" },
+  -- },
   {
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
@@ -142,6 +143,12 @@ require('lazy').setup({
     },
     config = function()
       require('telescope').setup {
+        defaults = {
+          sorting_strategy = "ascending",
+          layout_config = {
+            prompt_position = "top"
+          }
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -154,7 +161,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sf', function()
-        builtin.find_files { previewer = false }
+        builtin.find_files { previewer = false, find_command = { "rg", "--files", "--sort", "path" } }
       end, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>gf', builtin.git_files, { desc = '[G]it [F]iles' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })

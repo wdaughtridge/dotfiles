@@ -8,8 +8,9 @@
 // from the command palette or from `Zed` application menu.
 {
   "autosave": "on_window_change",
-  "buffer_font_family": "MesloLGLDZ Nerd Font Mono",
-  "theme": "Dracula",
+  "format_on_save": "off",
+  "buffer_font_family": "0xProto Nerd Font",
+  "theme": "One Dark",
   "relative_line_numbers": true,
   "buffer_line_height": "standard",
   "telemetry": {
