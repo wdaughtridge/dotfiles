@@ -1,7 +1,4 @@
-vim.api.nvim_create_user_command('Q', 'q', {})
-vim.api.nvim_create_user_command('W', 'w', {})
-
-vim.cmd 'hi Normal guibg=NONE ctermbg=NONE'
+vim.cmd 'colorscheme sorbet'
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -31,9 +28,9 @@ vim.opt.autoread = true
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
-vim.cmd 'filetype on'
--- vim.api.nvim_create_user_command('E', 'Oil', {})
 vim.api.nvim_create_user_command('E', 'Ex', {})
+
+vim.cmd 'filetype on'
 vim.cmd 'au BufRead,BufNewFile *.yaml set filetype=helm'
 
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
@@ -45,15 +42,9 @@ vim.keymap.set('n', '<C-g>', 'gt')
 vim.keymap.set('n', '<C-f>', 'gT')
 vim.keymap.set('i', '<C-g>', '<Esc>gt')
 vim.keymap.set('i', '<C-f>', '<Esc>gT')
-vim.keymap.set('i', '<C-t>', ':ToggleTerm<CR>')
-vim.keymap.set('n', '<C-t>', ':ToggleTerm<CR>')
-vim.keymap.set('n', '<C-d>', '<C-d>zz')
-vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', '<leader>X', ':read !<C-r>0<CR>')
 vim.keymap.set('n', '<leader>bd', vim.cmd.bdelete)
-vim.keymap.set('n', '<leader>tc', vim.cmd.tabclose)
 vim.keymap.set('n', '<leader>tn', vim.cmd.tabnew)
-vim.keymap.set('n', '<leader>~', vim.cmd.terminal)
 vim.keymap.set('n', '<leader>cf', vim.cmd.cfirst)
 vim.keymap.set('n', '<leader>cl', vim.cmd.clast)
 vim.keymap.set('n', '<leader>cn', vim.cmd.cnext)
@@ -78,26 +69,12 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  {
-    "Mofiqul/dracula.nvim",
-    priority = 100,
-    config = function()
-      vim.cmd 'colorscheme dracula'
-    end
-  },
-  {
-    'akinsho/toggleterm.nvim',
-    opts = {
-      direction = 'float',
-    },
-  },
+
   {
     "tpope/vim-fugitive",
     config = function()
-      vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
       local Fugitive = vim.api.nvim_create_augroup("Fugitive", {})
-      local autocmd = vim.api.nvim_create_autocmd
-      autocmd("BufWinEnter", {
+      vim.api.nvim_create_autocmd("BufWinEnter", {
         group = Fugitive,
         pattern = "*",
         callback = function()
@@ -114,18 +91,9 @@ require('lazy').setup({
           end, opts)
         end,
       })
-      vim.keymap.set("n", "gu", "<cmd>diffget //2<CR>")
-      vim.keymap.set("n", "gh", "<cmd>diffget //3<CR>")
     end
   },
-  {
-    'numToStr/Comment.nvim', opts = {}
-  },
-  -- {
-  --   'stevearc/oil.nvim',
-  --   opts = {},
-  --   dependencies = { "nvim-tree/nvim-web-devicons" },
-  -- },
+
   {
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
@@ -160,10 +128,8 @@ require('lazy').setup({
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>sf', function()
-        builtin.find_files { previewer = false, find_command = { "rg", "--files", "--sort", "path" } }
-      end, { desc = '[S]earch [F]iles' })
-      vim.keymap.set('n', '<leader>gf', builtin.git_files, { desc = '[G]it [F]iles' })
+      vim.keymap.set('n', '<leader>af', function() builtin.find_files { hidden = true } end, { desc = '[A]ll [F]iles' })
+      vim.keymap.set('n', '<leader>sf', builtin.git_files, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
@@ -171,30 +137,18 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
-      vim.keymap.set('n', '<leader>/', function()
-        builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-          winblend = 10,
-          previewer = false,
-        })
-      end, { desc = '[/] Fuzzily search in current buffer' })
-      vim.keymap.set('n', '<leader>s/', function()
-        builtin.live_grep {
-          grep_open_files = true,
-          prompt_title = 'Live Grep in Open Files',
-        }
-      end, { desc = '[S]earch [/] in Open Files' })
       vim.keymap.set('n', '<leader>sn', function()
-        builtin.find_files { cwd = vim.fn.stdpath 'config', previewer = false, }
+        builtin.find_files { cwd = '~/repos/dotfiles/nvim/.config/nvim/', previewer = false, }
       end, { desc = '[S]earch [N]eovim files' })
     end,
   },
+
   {
     'neovim/nvim-lspconfig',
     dependencies = {
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-      { 'j-hui/fidget.nvim',  opts = {} },
       { 'folke/lazydev.nvim', opts = {} },
     },
     config = function()
@@ -212,11 +166,11 @@ require('lazy').setup({
           map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
           map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-          vim.keymap.set('i', '<C-s>', vim.lsp.buf.signature_help,
-            { buffer = event.buf, desc = 'LSP: Show Signature Help' })
           map('<leader>f', vim.lsp.buf.format, '[F]ormat')
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+          vim.keymap.set('i', '<C-s>', vim.lsp.buf.signature_help,
+            { buffer = event.buf, desc = 'LSP: Show Signature Help' })
         end,
       })
       local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -230,7 +184,6 @@ require('lazy').setup({
           },
         },
         terraformls = {},
-        bashls = {},
         omnisharp = {},
         lua_ls = {
           settings = {
@@ -244,9 +197,7 @@ require('lazy').setup({
       }
       require('mason').setup()
       local ensure_installed = vim.tbl_keys(servers or {})
-      vim.list_extend(ensure_installed, {
-        'stylua',
-      })
+      vim.list_extend(ensure_installed, { 'stylua' })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
       require('mason-lspconfig').setup {
         handlers = {
@@ -259,6 +210,7 @@ require('lazy').setup({
       }
     end,
   },
+
   {
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
@@ -314,11 +266,12 @@ require('lazy').setup({
       }
     end,
   },
+
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'helm', 'yaml', 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'go', 'c_sharp', 'dockerfile', 'xml' },
+      ensure_installed = { 'helm', 'lua', 'vim', 'vimdoc', 'query', 'markdown', 'markdown_inline' },
       auto_install = true,
       highlight = { enable = true },
       indent = { enable = true },
@@ -328,6 +281,7 @@ require('lazy').setup({
       require('nvim-treesitter.configs').setup(opts)
     end,
   },
+
 }, {
   ui = {},
 })

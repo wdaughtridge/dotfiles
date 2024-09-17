@@ -8,7 +8,7 @@ augroup END
 
 let mapleader = " "
 
-colorscheme retrobox 
+colorscheme sorbet
 
 syntax enable
 filetype plugin on
