@@ -1,6 +1,6 @@
 [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 
-export PATH="/opt/homebrew/bin:/Users/wdaughtridge/go/bin:/opt/homebrew/lib/ruby/gems/3.2.0/bin:/opt/homebrew/opt/ruby/bin:/Users/wdaughtridge/.local/bin/nvim-macos/bin:$HOME/.config/emacs/bin:$PATH"
+export PATH="/opt/homebrew/bin:/Users/wdaughtridge/go/bin:/opt/homebrew/lib/ruby/gems/3.2.0/bin:/opt/homebrew/opt/ruby/bin:/Users/wdaughtridge/.local/bin/nvim-macos/bin:$HOME/.config/emacs/bin:/Users/wdaughtridge/Library/Application\ Support/Zed/extensions/work/csharp/omnisharp-v1.39.12:$PATH"
 
 export BAT_THEME="ansi"
 

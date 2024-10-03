@@ -11,7 +11,7 @@ if test -f ~/.devpy/bin/activate.fish
 end
 
 # PATH
-set -gx PATH ~/.config/emacs/bin ~/.dotnet/tools /opt/homebrew/lib/ruby/gems/3.2.0/bin /opt/homebrew/opt/ruby/bin /opt/homebrew/bin /opt/homebrew/sbin $GOBIN $PATH
+set -gx PATH ~/.config/emacs/bin ~/.dotnet/tools /opt/homebrew/lib/ruby/gems/3.2.0/bin /opt/homebrew/opt/ruby/bin /opt/homebrew/bin /opt/homebrew/sbin ~/repos/emacs/src ~/repos/elixir-ls/release /Library/Frameworks/Mono.framework/Versions/Current/bin /Users/wdaughtridge/Library/Application\ Support/Zed/extensions/work/csharp/omnisharp-v1.39.12 $GOBIN $PATH
 
 fzf --fish | source
 

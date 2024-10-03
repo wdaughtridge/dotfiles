@@ -5,6 +5,7 @@ name = William Daughtridge
 email = wdaughtridge@alarm.com
 [core]
 editor = nvim
+	autocrlf = input
 [push]
 autoSetupRemote = true
 [maintenance]

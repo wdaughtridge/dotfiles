@@ -1,4 +1,5 @@
 vim.cmd 'colorscheme sorbet'
+vim.cmd 'hi Normal guibg=NONE ctermbg=NONE'
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
