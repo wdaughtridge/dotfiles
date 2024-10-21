@@ -1,10 +1,5 @@
 return {
   {
-    "stevearc/conform.nvim",
-    opts = require "configs.conform",
-  },
-
-  {
     "neovim/nvim-lspconfig",
     config = function()
       require "configs.lspconfig"
@@ -24,7 +19,7 @@ return {
 
   {
     "nvim-orgmode/orgmode",
-    event = "VeryLazy",
+    lazy = false,
     ft = { "org" },
     config = function()
       require("orgmode").setup({
@@ -48,26 +43,16 @@ return {
 
   {
     "tpope/vim-fugitive",
-    event = "VeryLazy",
-    config = function()
-      local Fugitive = vim.api.nvim_create_augroup("Fugitive", {})
-      vim.api.nvim_create_autocmd("BufWinEnter", {
-        group = Fugitive,
-        pattern = "*",
-        callback = function()
-          if vim.bo.ft ~= "fugitive" then
-            return
-          end
-          local bufnr = vim.api.nvim_get_current_buf()
-          local opts = { buffer = bufnr, remap = false }
-          vim.keymap.set("n", "<leader>F", function()
-            vim.cmd.Git('pull')
-          end, opts)
-          vim.keymap.set("n", "<leader>P", function()
-            vim.cmd.Git('push')
-          end, opts)
-        end,
-      })
-    end,
+    lazy = false,
+  },
+
+  {
+    "stevearc/conform.nvim",
+    enabled = false,
+  },
+
+  {
+    "nvim-tree/nvim-tree.lua",
+    enabled = false,
   },
 }

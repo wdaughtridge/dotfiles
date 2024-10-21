@@ -47,7 +47,7 @@ bind \ct ~/.local/bin/tmux-terminal-sessionizer
 set -x BAT_THEME "Visual Studio Dark+"
 
 function fish_prompt
-    if set -q KUBECONFIG
+    if set -q KUBECONFIG && string match "*dev*" $KUBECONFIG --invert
         set kube_prompt "@" (string replace ".yaml" "" (path basename $KUBECONFIG))
     else
         set -e kube_prompt
@@ -56,3 +56,10 @@ function fish_prompt
     set_color green
     echo (path basename (pwd))(set_color cyan) $kube_prompt '>' (set_color normal)
 end
+
+# pnpm
+set -gx PNPM_HOME "/Users/wdaughtridge/Library/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end

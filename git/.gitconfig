@@ -1,12 +1,8 @@
-# This is Git's per-user configuration file.
 [user]
-# Please adapt and uncomment the following lines:
 name = William Daughtridge
 email = wdaughtridge@alarm.com
 [core]
 editor = nvim
-	autocrlf = input
+autocrlf = input
 [push]
 autoSetupRemote = true
-[maintenance]
-	repo = /Users/wdaughtridge/repos/puppet
