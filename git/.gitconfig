@@ -1,8 +1,12 @@
 [user]
-name = William Daughtridge
-email = wdaughtridge@alarm.com
+	name = William Daughtridge
+	email = wdaughtridge@alarm.com
 [core]
-editor = nvim
-autocrlf = input
+	editor = nvim
+	autocrlf = input
 [push]
-autoSetupRemote = true
+	autoSetupRemote = true
+[includeIf "gitdir:~/work/"]
+  path = .gitconfig-work
+[includeIf "gitdir:~/personal/"]
+  path = .gitconfig-personal
