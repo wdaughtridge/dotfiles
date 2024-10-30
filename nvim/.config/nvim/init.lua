@@ -8,3 +8,7 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help ta
 
 local lspconfig = require('lspconfig')
 lspconfig.gopls.setup{}
+lspconfig.rust_analyzer.setup{}
+lspconfig.lua_ls.setup{}
+
+require("mason").setup{}
