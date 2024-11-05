@@ -1,12 +1,15 @@
-[user]
-	name = William Daughtridge
-	email = wdaughtridge@alarm.com
 [core]
 	editor = nvim
 	autocrlf = input
+
 [push]
 	autoSetupRemote = true
-[includeIf "gitdir:~/work/"]
-  path = .gitconfig-work
-[includeIf "gitdir:~/personal/"]
-  path = .gitconfig-personal
+
+[include]
+	path = ~/.gitconfig-personal
+
+[includeIf "hasconfig:remote.*.url:https://bitbucket**"]
+	path = ~/.gitconfig-work
+
+[includeIf "hasconfig:remote.*.url:https://dev.azure.com/**"]
+	path = ~/.gitconfig-work
