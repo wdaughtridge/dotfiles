@@ -4,31 +4,28 @@ fish_config theme choose "Dracula Official"
 set -gx GOPATH /Users/wdaughtridge/go
 set -gx GOBIN $GOPATH/bin
 
-if test -f ~/.devpy/bin/activate.fish
-    # Python
-    set -gx VIRTUAL_ENV_DISABLE_PROMPT "YES"
-    source ~/.devpy/bin/activate.fish
-end
-
 # PATH
-set -gx PATH ~/.config/emacs/bin ~/.dotnet/tools /opt/homebrew/lib/ruby/gems/3.2.0/bin /opt/homebrew/opt/ruby/bin /opt/homebrew/bin /opt/homebrew/sbin ~/repos/emacs/src ~/repos/elixir-ls/release /Library/Frameworks/Mono.framework/Versions/Current/bin /Users/wdaughtridge/Library/Application\ Support/Zed/extensions/work/csharp/omnisharp-v1.39.12 $GOBIN $PATH
+set -gx PATH ~/.dotnet/tools /opt/homebrew/bin /opt/homebrew/sbin $GOBIN $PATH
 
 fzf --fish | source
 
 function switch_to_repo
-    set selected (find ~/repos -mindepth 1 -maxdepth 1 -type d | fzf || return 1)
-    cd $selected
-    commandline -f repaint
+	set selected (find ~/repos -mindepth 1 -maxdepth 1 -type d | fzf || return 1)
+	cd $selected
+	commandline -f repaint
 end
 
-function switch_kubeconfig
-    set selected (find ~/.kube -name "*.yaml" -mindepth 1 -maxdepth 1 | fzf || return 1)
-    set -gx KUBECONFIG $selected
-    commandline -f repaint
+if test -d ~/.kube
+	function switch_kubeconfig
+		set selected (find ~/.kube -name "*.yaml" -mindepth 1 -maxdepth 1 | fzf || return 1)
+		set -gx KUBECONFIG $selected
+		commandline -f repaint
+	end
+	bind \ck switch_kubeconfig
 end
 
 function toggle_fg_proc
-    fg 2&> /dev/null
+	fg 2&> /dev/null
 end
 
 # Abbreviations
@@ -40,26 +37,18 @@ abbr -a erase_kubeconfig set -e KUBECONFIG
 
 # Key bindings
 bind \cf switch_to_repo
-bind \ck switch_kubeconfig
 bind \cz toggle_fg_proc
 bind \ct ~/.local/bin/tmux-terminal-sessionizer
 
 set -x BAT_THEME "Visual Studio Dark+"
 
 function fish_prompt
-    if set -q KUBECONFIG && string match "*dev*" $KUBECONFIG --invert
-        set kube_prompt "@" (string replace ".yaml" "" (path basename $KUBECONFIG))
-    else
-        set -e kube_prompt
-    end
+	if set -q KUBECONFIG && string match "*dev*" $KUBECONFIG --invert
+		set kube_prompt "@" (string replace ".yaml" "" (path basename $KUBECONFIG))
+	else
+		set -e kube_prompt
+	end
 
-    set_color green
-    echo (path basename (pwd))(set_color cyan) $kube_prompt '>' (set_color normal)
+	set_color green
+	echo (path basename (pwd))(set_color cyan) $kube_prompt '>' (set_color normal)
 end
-
-# pnpm
-set -gx PNPM_HOME "/Users/wdaughtridge/Library/pnpm"
-if not string match -q -- $PNPM_HOME $PATH
-  set -gx PATH "$PNPM_HOME" $PATH
-end
-# pnpm end
