@@ -8,7 +8,7 @@
 [include]
 	path = ~/.gitconfig-personal
 
-[includeIf "hasconfig:remote.*.url:https://bitbucket**"]
+[includeIf "hasconfig:remote.*.url:https://bitbucket.*.*.*/**"]
 	path = ~/.gitconfig-work
 
 [includeIf "hasconfig:remote.*.url:https://dev.azure.com/**"]

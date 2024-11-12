@@ -10,7 +10,7 @@ set -gx PATH ~/.dotnet/tools /opt/homebrew/bin /opt/homebrew/sbin $GOBIN $PATH
 fzf --fish | source
 
 function switch_to_repo
-	set selected (find ~/repos -mindepth 1 -maxdepth 1 -type d | fzf || return 1)
+	set selected (find ~/Developer -mindepth 1 -maxdepth 1 -type d | fzf || return 1)
 	cd $selected
 	commandline -f repaint
 end
