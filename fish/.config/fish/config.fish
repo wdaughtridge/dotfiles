@@ -4,8 +4,10 @@ fish_config theme choose "Dracula Official"
 set -gx GOPATH /Users/wdaughtridge/go
 set -gx GOBIN $GOPATH/bin
 
+set -gx DENO_INSTALL ~/.deno
+
 # PATH
-set -gx PATH ~/.dotnet/tools /opt/homebrew/bin /opt/homebrew/sbin $GOBIN $PATH
+set -gx PATH $DENO_INSTALL/bin ~/.dotnet/tools /opt/homebrew/bin /opt/homebrew/sbin $GOBIN $PATH
 
 fzf --fish | source
 

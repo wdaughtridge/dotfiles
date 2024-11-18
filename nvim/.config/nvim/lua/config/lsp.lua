@@ -1,7 +1,19 @@
 local lspconfig = require('lspconfig')
+
 lspconfig.gopls.setup {}
+
 lspconfig.rust_analyzer.setup {}
-lspconfig.lua_ls.setup {}
+
+lspconfig.denols.setup {}
+
+lspconfig.omnisharp.setup {
+	cmd = { '/Users/wdaughtridge/.local/share/nvim/mason/bin/omnisharp' },
+}
+
+lspconfig.elixirls.setup {
+	cmd = { '/Users/wdaughtridge/.local/share/nvim/mason/bin/elixir-ls' },
+}
+
 lspconfig.lua_ls.setup {
 	on_init = function(client)
 		if client.workspace_folders then
@@ -27,10 +39,4 @@ lspconfig.lua_ls.setup {
 	settings = {
 		Lua = {}
 	}
-}
-lspconfig.omnisharp.setup {
-	cmd = { '/Users/wdaughtridge/.local/share/nvim/mason/bin/omnisharp' },
-}
-lspconfig.elixirls.setup {
-	cmd = { '/Users/wdaughtridge/.local/share/nvim/mason/bin/elixir-ls' },
 }
