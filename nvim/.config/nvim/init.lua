@@ -19,6 +19,7 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help ta
 vim.keymap.set('n', '<leader>e', vim.cmd.Explore)
 vim.keymap.set('n', '<leader>x', vim.cmd.bdelete)
 vim.keymap.set('n', '<Esc>', vim.cmd.nohlsearch)
+vim.keymap.set('n', '<leader>bf', vim.lsp.buf.format)
 
 require('mason').setup {}
 

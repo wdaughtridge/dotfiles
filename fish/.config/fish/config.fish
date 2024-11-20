@@ -7,7 +7,7 @@ set -gx GOBIN $GOPATH/bin
 set -gx DENO_INSTALL ~/.deno
 
 # PATH
-set -gx PATH $DENO_INSTALL/bin ~/.dotnet/tools /opt/homebrew/bin /opt/homebrew/sbin $GOBIN $PATH
+set -gx PATH ~/.local/share/nvim/mason/bin $DENO_INSTALL/bin ~/.dotnet/tools /opt/homebrew/bin /opt/homebrew/sbin $GOBIN $PATH
 
 fzf --fish | source
 

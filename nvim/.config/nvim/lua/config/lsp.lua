@@ -7,11 +7,11 @@ lspconfig.rust_analyzer.setup {}
 lspconfig.denols.setup {}
 
 lspconfig.omnisharp.setup {
-	cmd = { '/Users/wdaughtridge/.local/share/nvim/mason/bin/omnisharp' },
+	cmd = { 'omnisharp' },
 }
 
 lspconfig.elixirls.setup {
-	cmd = { '/Users/wdaughtridge/.local/share/nvim/mason/bin/elixir-ls' },
+	cmd = { 'elixir-ls' },
 }
 
 lspconfig.lua_ls.setup {
