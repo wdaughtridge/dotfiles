@@ -1,5 +1,3 @@
-fish_config theme choose "Dracula Official"
-
 # Go
 set -gx GOPATH /Users/wdaughtridge/go
 set -gx GOBIN $GOPATH/bin

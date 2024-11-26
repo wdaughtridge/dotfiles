@@ -24,3 +24,5 @@ require('lazy').setup({
   },
   checker = { enabled = true }
 })
+
+require('telescope').setup{ defaults = { file_ignore_patterns = {"deps"} } }
