@@ -3,7 +3,7 @@ require('config.lsp')
 
 vim.g.netrw_winsize = 25
 
-vim.cmd.colorscheme('habamax')
+vim.cmd.colorscheme('wildcharm')
 vim.cmd.hi('Normal guibg=NONE ctermbg=NONE')
 vim.opt.signcolumn = 'yes'
 
