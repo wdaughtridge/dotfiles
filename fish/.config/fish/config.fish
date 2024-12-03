@@ -52,3 +52,7 @@ function fish_prompt
 	set_color green
 	echo (path basename (pwd))(set_color cyan) $kube_prompt '>' (set_color normal)
 end
+
+# >>> coursier install directory >>>
+set -gx PATH "$PATH:/Users/wdaughtridge/Library/Application Support/Coursier/bin"
+# <<< coursier install directory <<<
