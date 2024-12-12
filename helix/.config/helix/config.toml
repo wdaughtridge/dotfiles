@@ -10,3 +10,6 @@ select = "underline"
 
 [editor.file-picker]
 hidden = false
+
+[editor.gutters]
+layout = ["diagnostics", "line-numbers", "spacer"]
