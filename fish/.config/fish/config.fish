@@ -1,3 +1,5 @@
+fish_config theme choose Base16\ Eighties
+
 # Go
 set -gx GOPATH /Users/wdaughtridge/go
 set -gx GOBIN $GOPATH/bin
@@ -29,10 +31,7 @@ function toggle_fg_proc
 end
 
 # Abbreviations
-abbr -a vim nvim
 abbr -a k kubectl
-abbr -a ta tmux a
-abbr -a cl clear
 abbr -a erase_kubeconfig set -e KUBECONFIG
 
 # Key bindings
@@ -41,18 +40,3 @@ bind \cz toggle_fg_proc
 bind \ct ~/.local/bin/tmux-terminal-sessionizer
 
 set -x BAT_THEME "Visual Studio Dark+"
-
-function fish_prompt
-    if set -q KUBECONFIG && string match "*dev*" $KUBECONFIG --invert
-        set kube_prompt "@" (string replace ".yaml" "" (path basename $KUBECONFIG))
-    else
-        set -e kube_prompt
-    end
-
-    set_color green
-    echo (path basename (pwd))(set_color cyan) $kube_prompt '>' (set_color normal)
-end
-
-# >>> coursier install directory >>>
-set -gx PATH "$PATH:/Users/wdaughtridge/Library/Application Support/Coursier/bin"
-# <<< coursier install directory <<<

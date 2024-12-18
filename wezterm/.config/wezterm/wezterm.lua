@@ -1,9 +1,9 @@
 local wezterm = require 'wezterm'
 local config = {}
 
-config.color_scheme = 'Tokyo Night Moon'
-config.font = wezterm.font 'JetBrains Mono'
-config.font_size = 16
+config.color_scheme = 'Kanagawa (Gogh)'
+config.font = wezterm.font 'JetBrains Mono SemiBold'
+config.font_size = 18
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 config.window_padding = {
