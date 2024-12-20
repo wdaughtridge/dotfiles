@@ -4,7 +4,7 @@ lspconfig.gopls.setup {}
 -- Rust
 lspconfig.rust_analyzer.setup {}
 -- Deno
-lspconfig.denols.setup {}
+-- lspconfig.denols.setup {}
 -- C#
 lspconfig.omnisharp.setup {
 	cmd = { 'omnisharp' },
@@ -13,3 +13,7 @@ lspconfig.omnisharp.setup {
 lspconfig.elixirls.setup {
 	cmd = { 'elixir-ls' },
 }
+-- Typescript
+lspconfig.ts_ls.setup {}
+-- Tailwind
+lspconfig.tailwindcss.setup {}

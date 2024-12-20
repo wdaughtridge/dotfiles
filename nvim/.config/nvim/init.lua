@@ -41,7 +41,7 @@ require('mason').setup {}
 
 -- Treesitter
 require 'nvim-treesitter.configs'.setup {
-	ensure_installed = { 'c', 'lua', 'vim', 'vimdoc', 'query', 'markdown', 'markdown_inline', 'go', 'rust', 'c_sharp' },
+	ensure_installed = { 'c', 'lua', 'vim', 'vimdoc', 'query', 'markdown', 'markdown_inline', 'go', 'rust', 'c_sharp', 'typescript' },
 	sync_install = false,
 	ignore_install = { 'javascript' },
 	highlight = {
