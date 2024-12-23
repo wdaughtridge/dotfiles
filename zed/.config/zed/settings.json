@@ -1,23 +1,17 @@
 {
-  "format_on_save": "off",
   "vim_mode": true,
+  "format_on_save": "off",
   "ui_font_size": 14,
-  "buffer_font_size": 14,
+  "buffer_font_size": 16,
   "theme": {
     "mode": "system",
-    "light": "One Light",
-    "dark": "One Dark"
+    "light": "Gruvbox Light",
+    "dark": "Gruvbox Dark"
   },
   "ui_font_family": "Menlo",
   "buffer_font_family": "Menlo",
-  "assistant": {
-    "version": "2",
-    "enabled": false
-  },
+  "assistant": { "version": "2", "enabled": false },
   "wrap_guides": [100],
   "cursor_blink": false,
-  "use_auto_surround": false,
-  "use_autoclose": false,
-  "auto_signature_help": true
-
+  "use_autoclose": false
 }
