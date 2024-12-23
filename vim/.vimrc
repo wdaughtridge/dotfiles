@@ -13,7 +13,12 @@ call plug#end()
 
 let mapleader = " "
 
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
 nnoremap <leader>a :Files<CR>
+nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>f :GFiles<CR>
 
 set number
