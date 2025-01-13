@@ -1,5 +1,5 @@
 # Theme
-fish_config theme choose Base16\ Eighties
+fish_config theme choose Seaweed
 # Go
 set -gx GOPATH /Users/wdaughtridge/go
 set -gx GOBIN $GOPATH/bin
