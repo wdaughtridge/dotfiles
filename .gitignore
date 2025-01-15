@@ -1,4 +1,6 @@
-vim/.vim/undodir/
+vim/.vim/undo/
+vim/.vim/swap/
+vim/.vim/backup/
 vim/.vim/plugged/
 vim/.vim/.netrwhist
 .DS_Store
