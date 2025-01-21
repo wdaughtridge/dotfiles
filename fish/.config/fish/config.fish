@@ -3,10 +3,8 @@ fish_config theme choose Seaweed
 # Go
 set -gx GOPATH /Users/wdaughtridge/go
 set -gx GOBIN $GOPATH/bin
-# Deno 🦕
-set -gx DENO_INSTALL ~/.deno
 # Path
-set -gx PATH ~/.local/share/nvim/mason/bin $DENO_INSTALL/bin /opt/homebrew/opt/llvm/bin ~/.dotnet/tools /opt/homebrew/bin /opt/homebrew/sbin $GOBIN $PATH
+set -gx PATH ~/.config/emacs/bin ~/Developer/emacs/src /opt/homebrew/bin /opt/homebrew/sbin $GOBIN $PATH
 # Fzf
 fzf --fish | source
 # Switch to repository
@@ -25,6 +23,7 @@ if test -d ~/.kube
     bind \ck switch_kubeconfig
 end
 # Abbreviations
+abbr -a gcc gcc-14
 abbr -a k kubectl
 abbr -a erase_kubeconfig set -e KUBECONFIG
 # Key bindings
