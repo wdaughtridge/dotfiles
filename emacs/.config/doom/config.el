@@ -21,8 +21,7 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
-;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
+(setq doom-font (font-spec :family "0xProto Nerd Font" :size 14 :weight 'normal))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -38,10 +37,36 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
+(require 'view)
+
+(defun my/scroll-down-half-page ()
+  "scroll down half a page while keeping the cursor centered"
+  (interactive)
+  (let ((ln (line-number-at-pos (point)))
+    (lmax (line-number-at-pos (point-max))))
+    (cond ((= ln 1) (move-to-window-line nil))
+      ((= ln lmax) (recenter (window-end)))
+      (t (progn
+           (move-to-window-line -1)
+           (recenter))))))
+
+(defun my/scroll-up-half-page ()
+  "scroll up half a page while keeping the cursor centered"
+  (interactive)
+  (let ((ln (line-number-at-pos (point)))
+    (lmax (line-number-at-pos (point-max))))
+    (cond ((= ln 1) nil)
+      ((= ln lmax) (move-to-window-line nil))
+      (t (progn
+           (move-to-window-line 0)
+           (recenter))))))
+
+(global-set-key (kbd "M-v") 'View-scroll-half-page-backward)
+(global-set-key (kbd "C-v") 'View-scroll-half-page-forward)
+
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
-
+(setq org-directory "~/Developer/org/")
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -74,3 +99,19 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+(use-package powershell)
+
+;; Disable automatic workspace creation on project switch
+(setq +workspaces-on-switch-project-behavior nil)
+
+;; Preserve workspace name when switching projects
+(defadvice! my/preserve-workspace-name-a (orig-fn &rest args)
+  "Prevent `projectile-switch-project' from renaming the current workspace."
+  :around #'projectile-switch-project
+  (let ((current-persp-name (safe-persp-name (get-current-persp))))
+    (apply orig-fn args)
+    (when (and (bound-and-true-p persp-mode)
+               (get-current-persp)
+               (not (string= current-persp-name (safe-persp-name (get-current-persp)))))
+      (persp-rename current-persp-name))))
