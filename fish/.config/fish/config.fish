@@ -4,7 +4,7 @@ fish_config theme choose Seaweed
 set -gx GOPATH /Users/wdaughtridge/go
 set -gx GOBIN $GOPATH/bin
 # Path
-set -gx PATH ~/.config/emacs/bin ~/Developer/emacs/src /opt/homebrew/bin /opt/homebrew/sbin $GOBIN $PATH
+set -gx PATH ~/.local/bin ~/.config/emacs/bin ~/Developer/emacs/src /opt/homebrew/bin /opt/homebrew/sbin $GOBIN $PATH
 # Fzf
 fzf --fish | source
 # Switch to repository
