@@ -1,7 +1,13 @@
 local wezterm = require("wezterm")
 local config = {}
 
-config.color_scheme = "Monokai Pro (Gogh)"
+local KanagawaDragon = wezterm.color.get_builtin_schemes()["Kanagawa (Gogh)"];
+KanagawaDragon.background = "#181616"
+config.color_schemes = {
+  ["KanagawaDragon"] = KanagawaDragon,
+}
+config.color_scheme = "KanagawaDragon";
+
 config.font = wezterm.font("JetBrains Mono SemiBold")
 config.font_size = 14
 config.use_fancy_tab_bar = false
