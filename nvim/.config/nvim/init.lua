@@ -55,6 +55,15 @@ require('lazy').setup {
   'tpope/vim-fugitive',
 
   {
+    "loctvl842/monokai-pro.nvim",
+    config = function()
+      require("monokai-pro").setup()
+
+      vim.cmd.colorscheme 'monokai-pro'
+    end
+  },
+
+  {
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
     branch = '0.1.x',
