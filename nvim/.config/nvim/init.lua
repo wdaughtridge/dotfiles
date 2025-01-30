@@ -190,7 +190,7 @@ require('lazy').setup {
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
       local servers = {
-        gopls = {},
+        -- gopls = {},
         rust_analyzer = {},
 
         lua_ls = {
