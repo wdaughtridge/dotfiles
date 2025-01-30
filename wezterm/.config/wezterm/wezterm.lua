@@ -8,8 +8,8 @@ config.color_schemes = {
 }
 config.color_scheme = "KanagawaDragon";
 
-config.font = wezterm.font("JetBrains Mono SemiBold")
-config.font_size = 14
+config.font = wezterm.font("0xProto Nerd Font")
+config.font_size = 18
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 config.window_padding = {
