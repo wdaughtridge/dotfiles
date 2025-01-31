@@ -35,6 +35,14 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+vim.filetype.add({
+  extension = {
+    c3 = "c3",
+    c3i = "c3",
+    c3t = "c3",
+  },
+})
+
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
@@ -59,6 +67,13 @@ require('lazy').setup {
   'tpope/vim-fugitive',
 
   {
+    "Shatur/neovim-ayu",
+    config = function ()
+      vim.cmd.colorscheme "ayu-mirage"
+    end,
+  },
+
+  {
     "rebelot/kanagawa.nvim",
     config = function()
       ---@diagnostic disable-next-line: missing-fields
@@ -70,8 +85,6 @@ require('lazy').setup {
           light = "lotus",
         },
       })
-
-      vim.cmd.colorscheme "kanagawa-dragon"
     end
   },
 
@@ -308,6 +321,16 @@ require('lazy').setup {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs',
+    config = function ()
+      local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+      parser_config.c3 = {
+        install_info = {
+          url = "https://github.com/c3lang/tree-sitter-c3",
+          files = {"src/parser.c", "src/scanner.c"},
+          branch = "main",
+        },
+      }
+    end,
     opts = {
       ensure_installed = {
         'bash',

@@ -1,12 +1,7 @@
 local wezterm = require("wezterm")
 local config = {}
 
-local KanagawaDragon = wezterm.color.get_builtin_schemes()["Kanagawa (Gogh)"];
-KanagawaDragon.background = "#181616"
-config.color_schemes = {
-  ["KanagawaDragon"] = KanagawaDragon,
-}
-config.color_scheme = "KanagawaDragon";
+config.color_scheme = "Ayu Dark (Gogh)"
 
 config.font = wezterm.font("0xProto Nerd Font")
 config.font_size = 18
