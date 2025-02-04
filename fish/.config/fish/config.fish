@@ -1,5 +1,6 @@
 # Theme
-fish_config theme choose Seaweed
+fish_config prompt choose arrow
+fish_config theme choose ayu\ Dark
 # Go
 set -gx GOPATH /Users/wdaughtridge/go
 set -gx GOBIN $GOPATH/bin
