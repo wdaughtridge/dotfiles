@@ -1,23 +1,23 @@
-#!/usr/bin/env fish
+#!/usr/bin/env bash
 
-set selected (find ~/.kube -name "*.yaml" -mindepth 1 -maxdepth 1 | fzf)
+selected=$(find ~/.kube -name "*.yaml" -mindepth 1 -maxdepth 1 | fzf)
 
-if [ -z $selected ]
+if [ -z $selected ]; then
     exit 0
-end
+fi
 
-set selected_name (basename $selected | tr . _)
-set tmux_running (pgrep tmux)
+selected_name=$(basename $selected | tr . _)
+tmux_running=$(pgrep tmux)
 
-if [ -z $TMUX ] && [ -z $tmux_running ]
+if [ -z $TMUX ] && [ -z $tmux_running ]; then
     tmux new-session -s $selected_name -c ~ -e "KUBECONFIG=$selected"
     exit 0
-end
+fi
 
-if ! tmux has-session -t=$selected_name 2> /dev/null
+if ! tmux has-session -t=$selected_name 2> /dev/null; then
     tmux new-session -ds $selected_name -c ~ -e "KUBECONFIG=$selected"
-end
+fi
 
-if ! tmux switch-client -t $selected_name 2> /dev/null
+if ! tmux switch-client -t $selected_name 2> /dev/null; then
     tmux attach-session -t $selected_name
-end
+fi

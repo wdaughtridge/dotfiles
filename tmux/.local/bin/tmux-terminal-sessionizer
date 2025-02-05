@@ -1,18 +1,18 @@
-#!/usr/bin/env fish
+#!/usr/bin/env bash
 
-set sesh terminal
+sesh=terminal
 
-set tmux_running (pgrep tmux)
+tmux_running=(pgrep tmux)
 
-if [ -z $TMUX ] && [ -z $tmux_running ]
+if [ -z $TMUX ] && [ -z $tmux_running ]; then
     tmux new-session -s $sesh -c /Users/wdaughtridge
     exit 0
-end
+fi
 
-if ! tmux has-session -t=$sesh 2> /dev/null
+if ! tmux has-session -t=$sesh 2> /dev/null; then
     tmux new-session -ds $sesh -c /Users/wdaughtridge
-end
+fi
 
-if ! tmux switch-client -t $sesh 2> /dev/null
+if ! tmux switch-client -t $sesh 2> /dev/null; then
     tmux attach-session -t $sesh
-end
+fi
