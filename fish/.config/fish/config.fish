@@ -30,5 +30,6 @@ abbr -a erase_kubeconfig set -e KUBECONFIG
 # Key bindings
 bind \cf switch_to_repo
 bind \ct ~/.local/bin/tmux-terminal-sessionizer
+bind \ce ~/.local/bin/tmux-emacs
 # Bat 🦇
 set -x BAT_THEME "Visual Studio Dark+"

@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+sesh=emacs
+
+tmux_running=(pgrep tmux)
+
+if [ -z $TMUX ] && [ -z $tmux_running ]; then
+    tmux new-session -s $sesh -c /Users/wdaughtridge "/opt/homebrew/bin/bash -c /opt/homebrew/bin/emacs"
+    exit 0
+fi
+
+if ! tmux has-session -t=$sesh 2> /dev/null; then
+    tmux new-session -ds $sesh -c /Users/wdaughtridge "/opt/homebrew/bin/bash -c /opt/homebrew/bin/emacs"
+fi
+
+if ! tmux switch-client -t $sesh 2> /dev/null; then
+    tmux attach-session -t $sesh
+fi
