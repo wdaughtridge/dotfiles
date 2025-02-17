@@ -5,7 +5,7 @@ fish_config theme choose ayu\ Dark
 set -gx GOPATH /Users/wdaughtridge/go
 set -gx GOBIN $GOPATH/bin
 # Path
-set -gx PATH ~/.local/bin ~/.config/emacs/bin ~/Developer/emacs/src /opt/homebrew/bin /opt/homebrew/sbin $GOBIN $PATH
+set -gx PATH ~/.local/bin ~/.config/emacs/bin /opt/homebrew/opt/llvm/bin /opt/homebrew/bin /opt/homebrew/sbin $GOBIN $PATH
 # Fzf
 fzf --fish | source
 # Switch to repository
