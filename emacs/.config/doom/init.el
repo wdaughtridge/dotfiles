@@ -28,7 +28,7 @@
        vc                  ; version-control and Emacs, sitting in a tree
 
        :term
-       ;;eshell            ; the elisp shell that works everywhere
+       eshell              ; the elisp shell that works everywhere
 
        :tools
        ;;ansible
@@ -43,7 +43,7 @@
 
        :os
        (:if (featurep :system 'macos) macos)
-       tty                 ; improve the terminal Emacs experience
+       tty               ; improve the terminal Emacs experience
 
        :lang
        (cc +tree-sitter)           ; C > C++ == 1
@@ -53,7 +53,7 @@
        ;;elixir                    ; erlang done right
        (emacs-lisp +tree-sitter)   ; drown in parentheses
        ;;erlang                    ; an elegant language for a more civilized age
-       ;;(go +lsp)                 ; the hipster dialect
+       (go +tree-sitter)                 ; the hipster dialect
        ;;(haskell +lsp)            ; a language that's lazier than I am
        ;;json                      ; At least it ain't XML
        ;;(java +lsp)               ; the poster child for carpal tunnel syndrome
