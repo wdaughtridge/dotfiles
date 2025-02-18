@@ -38,6 +38,7 @@
        magit               ; a git porcelain for Emacs
        make                ; run make tasks from Emacs
        terraform           ; infrastructure as code
+       lsp
        ;;tmux              ; an API for interacting with tmux
        tree-sitter         ; syntax and parsing, sitting in a tree...
 
@@ -64,7 +65,7 @@
        ;;ocaml                     ; an objective camel
        (org +tree-sitter)          ; organize your plain life in plain text
        (python +tree-sitter)       ; beautiful is better than ugly
-       (rust +tree-sitter)         ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       (rust +lsp +tree-sitter)         ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        (sh +tree-sitter)           ; she sells {ba,z,fi}sh shells on the C xor
        (swift +tree-sitter)        ; who asked for emoji variables?
        ;;yaml                      ; JSON, but readable
