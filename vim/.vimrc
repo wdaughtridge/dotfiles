@@ -7,9 +7,15 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'tpope/vim-fugitive'
 
+Plug 'ayu-theme/ayu-vim'
+
 call plug#end()
 
 " Config
+
+set termguicolors
+let ayucolor="dark"
+colorscheme ayu
 
 set grepprg=rg\ --vimgrep\ --smart-case\ --follow
 
@@ -35,7 +41,6 @@ set encoding=utf-8
 set hlsearch
 set history=700
 set t_Co=256
-set termguicolors
 set background=dark
 set tabpagemax=1000
 set ruler
@@ -58,4 +63,5 @@ map <C-l> <C-W>l
 map Q <Nop>
 
 filetype plugin on
+
 map <C-F12> :!ctags -R -I --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
