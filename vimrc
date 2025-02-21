@@ -70,4 +70,3 @@ filetype plugin on
 map <C-F12> :!ctags -R -I --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
 " vim: filetype=vim
-

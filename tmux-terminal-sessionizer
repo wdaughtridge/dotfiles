@@ -18,4 +18,3 @@ if ! tmux switch-client -t $sesh 2>/dev/null; then
 fi
 
 # vim: filetype=bash
-

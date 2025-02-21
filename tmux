@@ -53,4 +53,3 @@ set -g display-panes-colour "darkcyan"
 set -g clock-mode-colour "darkcyan"
 
 # vim: filetype=conf
-
