@@ -1,0 +1,18 @@
+---
+- name: Create ~/.config/* directories
+  hosts: localhost
+  gather_facts: yes
+
+  tasks:
+    - name: Ensure ~/.config directory exists
+      file:
+        path: "{{ lookup('env', 'HOME') }}/.config"
+        state: directory
+        mode: '0755'
+
+    - name: Ensure ~/.config directory exists
+      when: ansible_facts['os_family'] == 'Darwin'
+      file:
+        path: "{{ lookup('env', 'HOME') }}/.config/ghostty"
+        state: directory
+        mode: '0755'

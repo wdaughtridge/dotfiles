@@ -1,0 +1,52 @@
+---
+- name: Install packages
+  hosts: localhost
+  gather_facts: yes
+  vars:
+    common_packages:
+      - pkg-config
+      - git
+      - vim
+      - curl
+      - stow
+      - llvm
+      - bash
+      - bat
+      - fzf
+      - jq
+      - make
+      - autoconf
+      - automake
+      - ripgrep
+      - tmux
+      - watch
+      - wget
+      - gcc
+    macos_packages:
+      - kubernetes-cli
+      - node
+      - go
+      - awscli
+      - azure-cli
+      - lazygit
+      - appcleaner
+      - lima
+      - python@3.13
+      - ghostty
+    debian_packages:
+      - python3
+
+  tasks:
+    - name: Install Homebrew packages on macOS
+      when: ansible_facts['os_family'] == 'Darwin'
+      community.general.homebrew:
+        name: "{{ common_packages + macos_packages }}"
+        state: present
+
+    - name: Install apt packages on Debian-based systems
+      when: ansible_facts['os_family'] == 'Debian'
+      apt:
+        name: "{{ common_packages + debian_packages }}"
+        state: present
+        update_cache: yes
+      become: yes
