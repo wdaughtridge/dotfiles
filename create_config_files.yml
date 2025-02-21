@@ -44,6 +44,12 @@
         content: "{{ lookup('ansible.builtin.file', 'vimrc', rstrip=false) }}"
         mode: '0644'
 
+    - name: Place profile config file
+      copy:
+        dest: "{{ lookup('env', 'HOME') }}/.profile"
+        content: "{{ lookup('ansible.builtin.file', 'profile', rstrip=false) }}"
+        mode: '0644'
+
     - name: Place bash config file
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.bashrc"
