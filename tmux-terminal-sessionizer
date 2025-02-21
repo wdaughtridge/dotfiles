@@ -16,3 +16,6 @@ fi
 if ! tmux switch-client -t $sesh 2>/dev/null; then
   tmux attach-session -t $sesh
 fi
+
+# vim: filetype=bash
+

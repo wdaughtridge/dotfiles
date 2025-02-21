@@ -3,187 +3,41 @@
   hosts: localhost
   gather_facts: yes
   vars:
-    config_files:
-      gitconfig_personal: |
-        [user]
-          name = Will Daughtridge
-          email = wdaughtridge@gmail.com
-
-      gitconfig_work: |
-        [user]
-          name = Will Daughtridge
-          email = wdaughtridge@alarm.com
-
-      gitconfig: |
-        [core]
-          editor = vim
-          autocrlf = input
-        [push]
-          autoSetupRemote = true
-
-      vimrc: |
-        " Managed by Ansible
-        " Created by wdaughtridge@gmail.com
-
-        " Plug
-
-        call plug#begin()
-
-        Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-        Plug 'junegunn/fzf.vim'
-
-        Plug 'tpope/vim-fugitive'
-
-        Plug 'ayu-theme/ayu-vim'
-
-        call plug#end()
-
-        " Config
-
-        set termguicolors
-        let ayucolor="dark"
-        colorscheme ayu
-
-        set grepprg=rg\ --vimgrep\ --smart-case\ --follow
-
-        let mapleader = " "
-
-        nnoremap <silent> <leader>f :GFiles<CR>
-        nnoremap <silent> <leader>b :Buffers<CR>
-
-        syntax on
-        filetype on
-
-        set expandtab
-        set bs=2
-        set tabstop=2
-        set shiftwidth=2
-        set autoindent
-        set smartindent
-        set smartcase
-        set ignorecase
-        set modeline
-        set nocompatible
-        set encoding=utf-8
-        set hlsearch
-        set history=700
-        set t_Co=256
-        set background=dark
-        set tabpagemax=1000
-        set ruler
-        set nojoinspaces
-        set shiftround
-        set relativenumber
-        set number
-        set nolbr
-        set tw=0
-
-        set backupdir=~/.vim/backup/
-        set directory=~/.vim/swap/
-        set undodir=~/.vim/undo/
-
-        map <C-j> <C-W>j
-        map <C-k> <C-W>k
-        map <C-h> <C-W>h
-        map <C-l> <C-W>l
-
-        map Q <Nop>
-
-        filetype plugin on
-
-        map <C-F12> :!ctags -R -I --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
-
-      tmux: |
-        set -g default-terminal "xterm-256color"
-        set-option -ga terminal-overrides ",xterm-256color:Tc"
-
-        # Shortcuts
-        bind p display-popup -w 80% -h 80% -d "#{pane_current_path}" -E "/opt/homebrew/bin/bash"
-        bind f run-shell "tmux neww ~/.local/bin/tmux-sessionizer"
-        bind k run-shell "tmux neww ~/.local/bin/tmux-kubeit"
-        bind t run-shell "tmux neww ~/.local/bin/tmux-terminal-sessionizer"
-        bind e run-shell "tmux neww ~/.local/bin/tmux-emacs"
-        bind ! run-shell "tmux neww ~/.local/bin/tmux-kill-session"
-
-        # Navigation
-        bind Up select-pane -U
-        bind Down select-pane -D
-        bind Left select-pane -L
-        bind Right select-pane -R
-
-        set -g mode-keys vi
-        set -g automatic-rename on
-        set -g automatic-rename-format "#{s/.*[\/]//}"
-
-        # Palette
-        set -g status-style "fg=darkcyan,bg=black"
-        set -g mode-style "fg=white,bg=darkcyan"
-        set -g message-style "fg=darkcyan,bg=black"
-        set -g message-command-style "fg=darkcyan,bg=black"
-
-        # Pane border
-        set -g pane-border-style "fg=gray"
-        set -g pane-active-border-style "fg=red"
-
-        # Status line
-        set -g status-left "#[fg=white,bg=darkcyan] #S "
-        set -g status-left-length 64
-        set -g status-right "#[fg=white,bg=darkcyan] %H:%M %m/%d/%Y "
-
-        # Window status
-        set -g window-status-style "fg=darkcyan,bg=black"
-        set -g window-status-format "< #I >"
-
-        # Current window status
-        set -g window-status-current-style "fg=black,bg=cyan"
-        set -g window-status-current-format "< #I >"
-
-        # Window with activity status
-        set -g window-status-activity-style "fg=cyan,bg=white"
-
-        # Pane number display
-        set -g display-panes-active-colour "darkcyan"
-        set -g display-panes-colour "darkcyan"
-
-        # Clock mode
-        set -g clock-mode-colour "darkcyan"
-
-      bashrc: |
-        alias ll='ls -la'
-        export PATH="$HOME/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
-        PS1="\w\$ "
-
-      ghostty: |
-        theme = ayu
 
   tasks:
     - name: Place git config file
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.gitconfig"
-        content: "{{ config_files.gitconfig_work + config_files.gitconfig }}"
+        content: "{{ lookup('ansible.builtin.file', 'gitconfig_personal') + lookup('ansible.builtin.file', 'gitconfig') }}"
         mode: '0644'
 
     - name: Place ghostty config file
       when: ansible_facts['os_family'] == 'Darwin'
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.config/ghostty/config"
-        content: "{{ config_files.ghostty }}"
+        content: "{{ lookup('ansible.builtin.file', 'ghostty') }}"
         mode: '0644'
 
     - name: Place tmux config file
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.tmux.conf"
-        content: "{{ config_files.tmux }}"
+        content: "{{ lookup('ansible.builtin.file', 'tmux') }}"
+        mode: '0644'
+
+    - name: Place tmux config file
+      copy:
+        dest: "{{ lookup('env', 'HOME') }}/.tmux.conf"
+        content: "{{ lookup('ansible.builtin.file', 'tmux') }}"
         mode: '0644'
 
     - name: Place vim config file
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.vimrc"
-        content: "{{ config_files.vimrc }}"
+        content: "{{ lookup('ansible.builtin.file', 'vimrc') }}"
         mode: '0644'
 
     - name: Place bash config file
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.bashrc"
-        content: "{{ config_files.bashrc }}"
+        content: "{{ lookup('ansible.builtin.file', 'bashrc') }}"
         mode: '0644'

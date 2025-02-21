@@ -1,0 +1,56 @@
+set -g default-terminal "xterm-256color"
+set-option -ga terminal-overrides ",xterm-256color:Tc"
+
+# Shortcuts
+bind p display-popup -w 80% -h 80% -d "#{pane_current_path}" -E "/opt/homebrew/bin/bash"
+bind f run-shell "tmux neww ~/.local/bin/tmux-sessionizer"
+bind k run-shell "tmux neww ~/.local/bin/tmux-kubeit"
+bind t run-shell "tmux neww ~/.local/bin/tmux-terminal-sessionizer"
+bind e run-shell "tmux neww ~/.local/bin/tmux-emacs"
+bind ! run-shell "tmux neww ~/.local/bin/tmux-kill-session"
+
+# Navigation
+bind Up select-pane -U
+bind Down select-pane -D
+bind Left select-pane -L
+bind Right select-pane -R
+
+set -g mode-keys vi
+set -g automatic-rename on
+set -g automatic-rename-format "#{s/.*[\/]//}"
+
+# Palette
+set -g status-style "fg=darkcyan,bg=black"
+set -g mode-style "fg=white,bg=darkcyan"
+set -g message-style "fg=darkcyan,bg=black"
+set -g message-command-style "fg=darkcyan,bg=black"
+
+# Pane border
+set -g pane-border-style "fg=gray"
+set -g pane-active-border-style "fg=red"
+
+# Status line
+set -g status-left "#[fg=white,bg=darkcyan] #S "
+set -g status-left-length 64
+set -g status-right "#[fg=white,bg=darkcyan] %H:%M %m/%d/%Y "
+
+# Window status
+set -g window-status-style "fg=darkcyan,bg=black"
+set -g window-status-format "< #I >"
+
+# Current window status
+set -g window-status-current-style "fg=black,bg=cyan"
+set -g window-status-current-format "< #I >"
+
+# Window with activity status
+set -g window-status-activity-style "fg=cyan,bg=white"
+
+# Pane number display
+set -g display-panes-active-colour "darkcyan"
+set -g display-panes-colour "darkcyan"
+
+# Clock mode
+set -g clock-mode-colour "darkcyan"
+
+# vim: filetype=conf
+

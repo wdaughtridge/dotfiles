@@ -1,0 +1,19 @@
+---
+- name: Create exec scripts
+  hosts: localhost
+  gather_facts: yes
+  vars:
+
+  tasks:
+    - name: Place tmux-sessionizer
+      copy:
+        dest: "{{ lookup('env', 'HOME') }}/.local/bin/tmux-sessionizer"
+        content: "{{ lookup('ansible.builtin.file', 'tmux-sessionizer') }}"
+        mode: '0744'
+
+    - name: Place tmux-terminal-sessionizer
+      copy:
+        dest: "{{ lookup('env', 'HOME') }}/.local/bin/tmux-terminal-sessionizer"
+        content: "{{ lookup('ansible.builtin.file', 'tmux-terminal-sessionizer') }}"
+        mode: '0744'
+
