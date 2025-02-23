@@ -22,6 +22,12 @@
         state: directory
         mode: '0755'
 
+    - name: Ensure .config/nvim directory
+      file:
+        path: "{{ lookup('env', 'HOME') }}/.config/nvim"
+        state: directory
+        mode: '0755'
+
     - name: Ensure .config/ghostty directory
       when: ansible_facts['os_family'] == 'Darwin'
       file:

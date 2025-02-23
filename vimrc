@@ -12,6 +12,8 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'ayu-theme/ayu-vim'
 
+Plug 'dense-analysis/ale'
+
 call plug#end()
 
 " Config
@@ -26,6 +28,11 @@ let mapleader = " "
 
 nnoremap <silent> <leader>f :GFiles<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
+
+nnoremap <silent> K <Plug>(ale_hover)
+nnoremap <silent> gr <Plug>(ale_find_references)
+nnoremap <silent> gd <Plug>(ale_go_to_definition)
+nnoremap <silent> gD <Plug>(ale_go_to_implementation)
 
 syntax on
 filetype on
@@ -53,6 +60,7 @@ set relativenumber
 set number
 set nolbr
 set tw=0
+set signcolumn=yes
 
 set backupdir=~/.vim/backup/
 set directory=~/.vim/swap/
@@ -66,7 +74,7 @@ map <C-l> <C-W>l
 map Q <Nop>
 
 filetype plugin on
-
-map <C-F12> :!ctags -R -I --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+set omnifunc=ale#completion#OmniFunc
+set completeopt-=preview
 
 " vim: filetype=vim
