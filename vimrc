@@ -11,8 +11,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sleuth'
 
-Plug 'ayu-theme/ayu-vim'
-
 Plug 'dense-analysis/ale'
 
 call plug#end()
@@ -20,8 +18,7 @@ call plug#end()
 " Config
 
 set termguicolors
-let ayucolor="dark"
-colorscheme ayu
+colorscheme unokai
 
 set grepprg=rg\ --vimgrep\ --smart-case\ --follow
 
@@ -35,25 +32,32 @@ nnoremap <silent> gr <Plug>(ale_find_references)
 nnoremap <silent> gd <Plug>(ale_go_to_definition)
 nnoremap <silent> gD <Plug>(ale_go_to_implementation)
 
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+map Q <Nop>
+
 syntax on
 filetype on
+filetype plugin on
+set omnifunc=ale#completion#OmniFunc
+set completeopt-=preview
 
 set bs=2
+set shiftround
 set autoindent
 set smartindent
 set smartcase
 set ignorecase
 set modeline
-set nocompatible
 set encoding=utf-8
 set hlsearch
 set history=700
 set t_Co=256
 set background=dark
-set tabpagemax=1000
 set ruler
-set nojoinspaces
-set shiftround
 set relativenumber
 set number
 set nolbr
@@ -63,16 +67,5 @@ set signcolumn=yes
 set backupdir=~/.vim/backup/
 set directory=~/.vim/swap/
 set undodir=~/.vim/undo/
-
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-
-map Q <Nop>
-
-filetype plugin on
-set omnifunc=ale#completion#OmniFunc
-set completeopt-=preview
 
 " vim: filetype=vim
