@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 
-selected=$(find $HOME -mindepth 1 -maxdepth 1 -type d | fzf)
+if [ -d $HOME/Developer ]; then
+  find_dir=$HOME/Developer
+else
+  find_dir=$HOME
+fi
+
+selected=$(find $find_dir -mindepth 1 -maxdepth 1 -type d | fzf)
 
 if [ -z $selected ]; then
   exit 0

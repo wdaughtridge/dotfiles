@@ -9,6 +9,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sleuth'
 
 Plug 'ayu-theme/ayu-vim'
 
@@ -37,10 +38,7 @@ nnoremap <silent> gD <Plug>(ale_go_to_implementation)
 syntax on
 filetype on
 
-set expandtab
 set bs=2
-set tabstop=2
-set shiftwidth=2
 set autoindent
 set smartindent
 set smartcase
