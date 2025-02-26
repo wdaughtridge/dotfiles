@@ -8,53 +8,59 @@
       file:
         path: "{{ lookup('env', 'HOME') }}/.local"
         state: directory
-        mode: '0755'
+        mode: "0755"
 
     - name: Ensure .local/bin directory
       file:
         path: "{{ lookup('env', 'HOME') }}/.local/bin"
         state: directory
-        mode: '0755'
+        mode: "0755"
 
     - name: Ensure base .config directory
       file:
         path: "{{ lookup('env', 'HOME') }}/.config"
         state: directory
-        mode: '0755'
+        mode: "0755"
 
     - name: Ensure .config/nvim directory
       file:
         path: "{{ lookup('env', 'HOME') }}/.config/nvim"
         state: directory
-        mode: '0755'
+        mode: "0755"
+
+    - name: Ensure .config/zed directory
+      file:
+        path: "{{ lookup('env', 'HOME') }}/.config/zed"
+        state: directory
+        mode: "0755"
 
     - name: Ensure .config/ghostty directory
       when: ansible_facts['os_family'] == 'Darwin'
       file:
         path: "{{ lookup('env', 'HOME') }}/.config/ghostty"
         state: directory
-        mode: '0755'
+        mode: "0755"
 
     - name: Ensure base .vim directory
       file:
         path: "{{ lookup('env', 'HOME') }}/.vim"
         state: directory
-        mode: '0755'
+        mode: "0755"
 
     - name: Ensure .vim/undo directory
       file:
         path: "{{ lookup('env', 'HOME') }}/.vim/undo"
         state: directory
-        mode: '0755'
+        mode: "0755"
 
     - name: Ensure base .vim/backup directory
       file:
         path: "{{ lookup('env', 'HOME') }}/.vim/backup"
         state: directory
-        mode: '0755'
+        mode: "0755"
 
     - name: Ensure base .vim/swap directory
       file:
         path: "{{ lookup('env', 'HOME') }}/.vim/swap"
         state: directory
-        mode: '0755'
+        mode: "0755"

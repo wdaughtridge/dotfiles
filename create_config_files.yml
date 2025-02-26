@@ -10,54 +10,60 @@
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.gitconfig"
         content: "{{ lookup('ansible.builtin.file', 'gitconfig_personal', rstrip=false) + lookup('ansible.builtin.file', 'gitconfig', rstrip=false) }}"
-        mode: '0644'
+        mode: "0644"
 
     - name: Place git config file
       when: ansible_facts['hostname'] != 'Williams-MacBook-Pro.local'
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.gitconfig"
         content: "{{ lookup('ansible.builtin.file', 'gitconfig_work', rstrip=false) + lookup('ansible.builtin.file', 'gitconfig', rstrip=false) }}"
-        mode: '0644'
+        mode: "0644"
+
+    - name: Place zed config file
+      copy:
+        dest: "{{ lookup('env', 'HOME') }}/.config/zed/settings.json"
+        content: "{{ lookup('ansible.builtin.file', 'zed', rstrip=false) }}"
+        mode: "0644"
 
     - name: Place ghostty config file
       when: ansible_facts['os_family'] == 'Darwin'
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.config/ghostty/config"
         content: "{{ lookup('ansible.builtin.file', 'ghostty', rstrip=false) }}"
-        mode: '0644'
+        mode: "0644"
 
     - name: Place tmux config file
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.tmux.conf"
         content: "{{ lookup('ansible.builtin.file', 'tmux', rstrip=false) }}"
-        mode: '0644'
+        mode: "0644"
 
     - name: Place tmux config file
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.tmux.conf"
         content: "{{ lookup('ansible.builtin.file', 'tmux', rstrip=false) }}"
-        mode: '0644'
+        mode: "0644"
 
     - name: Place nvim config file
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.config/nvim/init.vim"
         content: "{{ lookup('ansible.builtin.file', 'vimrc', rstrip=false) }}"
-        mode: '0644'
+        mode: "0644"
 
     - name: Place vim config file
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.vimrc"
         content: "{{ lookup('ansible.builtin.file', 'vimrc', rstrip=false) }}"
-        mode: '0644'
+        mode: "0644"
 
     - name: Place profile config file
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.profile"
         content: "{{ lookup('ansible.builtin.file', 'profile', rstrip=false) }}"
-        mode: '0644'
+        mode: "0644"
 
     - name: Place bash config file
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.bashrc"
         content: "{{ lookup('ansible.builtin.file', 'bashrc', rstrip=false) }}"
-        mode: '0644'
+        mode: "0644"
