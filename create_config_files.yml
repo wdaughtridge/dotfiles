@@ -50,6 +50,12 @@
         content: "{{ lookup('ansible.builtin.file', 'vimrc', rstrip=false) }}"
         mode: "0644"
 
+    - name: Place helix config file
+      copy:
+        dest: "{{ lookup('env', 'HOME') }}/.config/helix/config.toml"
+        content: "{{ lookup('ansible.builtin.file', 'helix', rstrip=false) }}"
+        mode: "0644"
+
     - name: Place vim config file
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.vimrc"

@@ -1,0 +1,22 @@
+theme = "ayu_dark"
+
+[editor]
+line-number = "relative"
+mouse = false
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[keys.normal]
+"}" = "goto_next_paragraph"
+"{" = "goto_prev_paragraph"
+"C-c" = "collapse_selection"
+"esc" = "collapse_selection"
+
+[keys.insert]
+"C-c" = "normal_mode"
