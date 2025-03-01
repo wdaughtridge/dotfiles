@@ -16,7 +16,7 @@ call plug#end()
 " Config
 
 set termguicolors
-colorscheme habamax
+colorscheme slate
 
 set grepprg=rg\ --vimgrep\ --smart-case\ --follow
 
@@ -60,5 +60,7 @@ set signcolumn=yes
 set backupdir=~/.vim/backup/
 set directory=~/.vim/swap/
 set undodir=~/.vim/undo/
+
+hi Normal guibg=NONE ctermbg=NONE
 
 " vim: filetype=vim
