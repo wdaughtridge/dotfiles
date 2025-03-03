@@ -20,26 +20,26 @@ set -g automatic-rename on
 set -g automatic-rename-format "#{s/.*[\/]//}"
 
 # Palette
-set -g status-style "fg=darkcyan,bg=black"
+set -g status-style "fg=darkcyan,bg=default"
 set -g mode-style "fg=white,bg=darkcyan"
-set -g message-style "fg=darkcyan,bg=black"
-set -g message-command-style "fg=darkcyan,bg=black"
+set -g message-style "fg=darkcyan,bg=default"
+set -g message-command-style "fg=darkcyan,bg=default"
 
 # Pane border
 set -g pane-border-style "fg=gray"
 set -g pane-active-border-style "fg=red"
 
 # Status line
-set -g status-left "#[fg=white,bg=darkcyan] #S "
+set -g status-left "#[fg=white,bg=darkcyan] #S #[fg=white,bg=default] "
 set -g status-left-length 64
 set -g status-right "#[fg=white,bg=darkcyan] %H:%M %m/%d/%Y "
 
 # Window status
-set -g window-status-style "fg=darkcyan,bg=black"
+set -g window-status-style "fg=white,bg=darkcyan"
 set -g window-status-format "< #I >"
 
 # Current window status
-set -g window-status-current-style "fg=black,bg=cyan"
+set -g window-status-current-style "fg=white,bg=cyan"
 set -g window-status-current-format "< #I >"
 
 # Window with activity status
