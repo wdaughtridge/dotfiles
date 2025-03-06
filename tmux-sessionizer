@@ -27,5 +27,3 @@ fi
 if ! tmux switch-client -t $selected_name 2>/dev/null; then
   tmux attach-session -t $selected_name
 fi
-
-# vim: filetype=bash

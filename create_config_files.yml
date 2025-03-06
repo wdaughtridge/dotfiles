@@ -19,12 +19,6 @@
         content: "{{ lookup('ansible.builtin.file', 'gitconfig_work', rstrip=false) + lookup('ansible.builtin.file', 'gitconfig', rstrip=false) }}"
         mode: "0644"
 
-    - name: Place zed config file
-      copy:
-        dest: "{{ lookup('env', 'HOME') }}/.config/zed/settings.json"
-        content: "{{ lookup('ansible.builtin.file', 'zed', rstrip=false) }}"
-        mode: "0644"
-
     - name: Place ghostty config file
       when: ansible_facts['os_family'] == 'Darwin'
       copy:
@@ -35,19 +29,13 @@
     - name: Place tmux config file
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.tmux.conf"
-        content: "{{ lookup('ansible.builtin.file', 'tmux', rstrip=false) }}"
-        mode: "0644"
-
-    - name: Place tmux config file
-      copy:
-        dest: "{{ lookup('env', 'HOME') }}/.tmux.conf"
-        content: "{{ lookup('ansible.builtin.file', 'tmux', rstrip=false) }}"
+        content: "{{ lookup('ansible.builtin.file', 'tmux.conf', rstrip=false) }}"
         mode: "0644"
 
     - name: Place helix config file
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.config/helix/config.toml"
-        content: "{{ lookup('ansible.builtin.file', 'helix', rstrip=false) }}"
+        content: "{{ lookup('ansible.builtin.file', 'helix.toml', rstrip=false) }}"
         mode: "0644"
 
     - name: Place vim config file

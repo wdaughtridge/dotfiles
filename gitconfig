@@ -3,5 +3,3 @@
   autocrlf = input
 [push]
   autoSetupRemote = true
-
-# vim: filetype=gitconfig

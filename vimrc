@@ -62,5 +62,3 @@ set directory=~/.vim/swap/
 set undodir=~/.vim/undo/
 
 hi Normal guibg=NONE ctermbg=NONE
-
-" vim: filetype=vim
