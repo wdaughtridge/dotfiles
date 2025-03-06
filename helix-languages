@@ -1,0 +1,7 @@
+[language-server.elp]
+command = "/Users/williamdaughtridge/.local/share/nvim/mason/bin/elp"
+args = ["server"]
+
+[[language]]
+name = "erlang"
+language-servers = [ "elp" ]
