@@ -9,14 +9,14 @@
       when: ansible_facts['hostname'] == 'Williams-MacBook-Pro.local'
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.gitconfig"
-        content: "{{ lookup('ansible.builtin.file', 'gitconfig_personal', rstrip=false) + lookup('ansible.builtin.file', 'gitconfig', rstrip=false) }}"
+        content: "{{ lookup('ansible.builtin.file', '.gitconfig-personal', rstrip=false) + lookup('ansible.builtin.file', '.gitconfig', rstrip=false) }}"
         mode: "0644"
 
     - name: Place git config file
       when: ansible_facts['hostname'] != 'Williams-MacBook-Pro.local'
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.gitconfig"
-        content: "{{ lookup('ansible.builtin.file', 'gitconfig_work', rstrip=false) + lookup('ansible.builtin.file', 'gitconfig', rstrip=false) }}"
+        content: "{{ lookup('ansible.builtin.file', '.gitconfig-work', rstrip=false) + lookup('ansible.builtin.file', '.gitconfig', rstrip=false) }}"
         mode: "0644"
 
     - name: Place ghostty config file
@@ -41,23 +41,23 @@
     - name: Place helix languages file
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.config/helix/languages.toml"
-        content: "{{ lookup('ansible.builtin.file', 'helix-languages', rstrip=false) }}"
+        content: "{{ lookup('ansible.builtin.file', 'helix-languages.toml', rstrip=false) }}"
         mode: "0644"
 
     - name: Place vim config file
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.vimrc"
-        content: "{{ lookup('ansible.builtin.file', 'vimrc', rstrip=false) }}"
+        content: "{{ lookup('ansible.builtin.file', '.vimrc', rstrip=false) }}"
         mode: "0644"
 
     - name: Place profile config file
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.profile"
-        content: "{{ lookup('ansible.builtin.file', 'profile', rstrip=false) }}"
+        content: "{{ lookup('ansible.builtin.file', '.profile', rstrip=false) }}"
         mode: "0644"
 
     - name: Place bash config file
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.bashrc"
-        content: "{{ lookup('ansible.builtin.file', 'bashrc', rstrip=false) }}"
+        content: "{{ lookup('ansible.builtin.file', '.bashrc', rstrip=false) }}"
         mode: "0644"

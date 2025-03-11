@@ -1,8 +1,3 @@
-" Managed by Ansible
-" Created by wdaughtridge@gmail.com
-
-" Plug
-
 call plug#begin()
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }

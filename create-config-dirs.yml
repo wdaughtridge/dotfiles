@@ -22,27 +22,9 @@
         state: directory
         mode: "0755"
 
-    - name: Ensure .config/nvim directory
-      file:
-        path: "{{ lookup('env', 'HOME') }}/.config/nvim"
-        state: directory
-        mode: "0755"
-
-    - name: Ensure .config/zed directory
-      file:
-        path: "{{ lookup('env', 'HOME') }}/.config/zed"
-        state: directory
-        mode: "0755"
-
     - name: Ensure .config/helix directory
       file:
         path: "{{ lookup('env', 'HOME') }}/.config/helix"
-        state: directory
-        mode: "0755"
-
-    - name: Ensure .config/doom directory
-      file:
-        path: "{{ lookup('env', 'HOME') }}/.config/doom"
         state: directory
         mode: "0755"
 
