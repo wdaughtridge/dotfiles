@@ -1,4 +1,4 @@
-theme = "gruvbox_dark_hard"
+theme = "autumn"
 
 [editor]
 line-number = "relative"
@@ -20,3 +20,7 @@ hidden = false
 
 [keys.insert]
 "C-c" = "normal_mode"
+"C-b" = "move_char_left"
+"C-f" = "move_char_right"
+"C-n" = "move_visual_line_down"
+"C-p" = "move_visual_line_up"
