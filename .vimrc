@@ -17,7 +17,8 @@ set grepprg=rg\ --vimgrep\ --smart-case\ --follow
 
 let mapleader = " "
 
-nnoremap <silent> <leader>f :GFiles<CR>
+nnoremap <silent> <leader>g :GFiles<CR>
+nnoremap <silent> <leader>f :Files<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 
 map <C-j> <C-W>j
