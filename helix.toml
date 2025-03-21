@@ -1,8 +1,9 @@
-theme = "carbonfox"
+theme = "github_light_high_contrast"
 
 [editor]
 line-number = "relative"
 mouse = false
+lsp.enable = false
 
 [editor.cursor-shape]
 insert = "bar"
