@@ -1,9 +1,8 @@
-theme = "github_light_high_contrast"
+theme = "base16_terminal"
 
 [editor]
 line-number = "relative"
 mouse = false
-lsp.enable = false
 
 [editor.cursor-shape]
 insert = "bar"
@@ -18,6 +17,10 @@ hidden = false
 "{" = "goto_prev_paragraph"
 "C-c" = "collapse_selection"
 "esc" = "collapse_selection"
+"C-b" = "move_char_left"
+"C-f" = "move_char_right"
+"C-n" = "move_visual_line_down"
+"C-p" = "move_visual_line_up"
 
 [keys.insert]
 "C-c" = "normal_mode"

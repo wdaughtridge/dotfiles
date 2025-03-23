@@ -22,6 +22,18 @@
         state: directory
         mode: "0755"
 
+    - name: Ensure .config/fish directory
+      file:
+        path: "{{ lookup('env', 'HOME') }}/.config/fish"
+        state: directory
+        mode: "0755"
+
+    - name: Ensure .config/helix directory
+      file:
+        path: "{{ lookup('env', 'HOME') }}/.config/nvim"
+        state: directory
+        mode: "0755"
+
     - name: Ensure .config/helix directory
       file:
         path: "{{ lookup('env', 'HOME') }}/.config/helix"
