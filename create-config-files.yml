@@ -6,17 +6,9 @@
 
   tasks:
     - name: Place git config file
-      when: ansible_facts['hostname'] == 'Williams-MacBook-Pro.local'
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.gitconfig"
-        content: "{{ lookup('ansible.builtin.file', '.gitconfig-personal', rstrip=false) + lookup('ansible.builtin.file', '.gitconfig', rstrip=false) }}"
-        mode: "0644"
-
-    - name: Place git config file
-      when: ansible_facts['hostname'] != 'Williams-MacBook-Pro.local'
-      copy:
-        dest: "{{ lookup('env', 'HOME') }}/.gitconfig"
-        content: "{{ lookup('ansible.builtin.file', '.gitconfig-work', rstrip=false) + lookup('ansible.builtin.file', '.gitconfig', rstrip=false) }}"
+        content: "{{ lookup('ansible.builtin.file', '.gitconfig-personal', rstrip=false) }}"
         mode: "0644"
 
     - name: Place fish config file
