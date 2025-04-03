@@ -1,5 +1,5 @@
 set fish_greeting
-fish_config theme choose ayu\ Dark
+fish_config theme choose Old\ School
 source $HOME/.cargo/env.fish
 alias http3-client $HOME/Developer/quiche/target/release/examples/http3-client
 set -x DOTNET_ROOT /opt/homebrew/opt/dotnet/libexec
