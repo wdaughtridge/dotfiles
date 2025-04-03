@@ -1,6 +1,7 @@
-theme = matrix
+theme = Atom
 macos-icon = retro
 font-thicken = true
 macos-titlebar-style = hidden
 macos-icon-frame = beige
 minimum-contrast = 2
+background = #171717
