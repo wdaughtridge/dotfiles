@@ -3,3 +3,4 @@ macos-icon = retro
 font-thicken = true
 macos-titlebar-style = hidden
 macos-icon-frame = beige
+foreground = #98bd91
