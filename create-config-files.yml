@@ -8,7 +8,7 @@
     - name: Place git config file
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.gitconfig"
-        content: "{{ lookup('ansible.builtin.file', '.gitconfig-personal', rstrip=false) }}"
+        content: "{{ lookup('ansible.builtin.file', '.gitconfig', rstrip=false) }}"
         mode: "0644"
 
     - name: Place fish config file
