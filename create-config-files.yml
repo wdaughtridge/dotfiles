@@ -49,12 +49,6 @@
         content: "{{ lookup('ansible.builtin.file', '.vimrc', rstrip=false) }}"
         mode: "0644"
 
-    - name: Place nvim config file
-      copy:
-        dest: "{{ lookup('env', 'HOME') }}/.config/nvim/init.vim"
-        content: "{{ lookup('ansible.builtin.file', '.vimrc', rstrip=false) }}"
-        mode: "0644"
-
     - name: Place profile config file
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.profile"
