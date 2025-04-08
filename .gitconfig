@@ -1,5 +1,8 @@
 [core]
-  editor = vim
+  editor = hx
   autocrlf = input
 [push]
   autoSetupRemote = true
+[user]
+  email = wdaughtridge@gmail.com
+  name = Will Daughtridge
