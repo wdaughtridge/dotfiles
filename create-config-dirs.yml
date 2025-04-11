@@ -28,7 +28,7 @@
         state: directory
         mode: "0755"
 
-    - name: Ensure .config/helix directory
+    - name: Ensure .config/nvim directory
       file:
         path: "{{ lookup('env', 'HOME') }}/.config/nvim"
         state: directory
