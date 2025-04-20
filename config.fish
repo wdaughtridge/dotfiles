@@ -1,13 +1,23 @@
 set fish_greeting
-fish_config theme choose ayu\ Mirage
+if test -f $HOME/.lightmode
+	fish_config theme choose ayu\ Light
+else
+	fish_config theme choose ayu\ Mirage
+end
 source $HOME/.cargo/env.fish
+function lg
+	lazygit
+end
+function so
+	source $HOME/.config/fish/config.fish
+end
 function lightmode
 	touch $HOME/.lightmode
-	source $HOME/.config/fish/config.fish
+	so
 end
 function darkmode
 	rm $HOME/.lightmode
-	source $HOME/.config/fish/config.fish
+	so
 end
 set -x VISUAL nvim
 set -x EDITOR nvim
