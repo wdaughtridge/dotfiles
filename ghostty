@@ -1,4 +1,4 @@
-theme = Kanagawa Wave
+theme = dark:ayu,light:ayu_light
 macos-icon = retro
 font-thicken = true
 macos-titlebar-style = hidden
