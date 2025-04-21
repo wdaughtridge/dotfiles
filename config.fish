@@ -5,6 +5,9 @@ else
 	fish_config theme choose ayu\ Mirage
 end
 source $HOME/.cargo/env.fish
+function shit
+	openssl dgst -sha256 $argv[1]
+end
 function lg
 	lazygit
 end
