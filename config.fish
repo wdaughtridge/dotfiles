@@ -1,23 +1,32 @@
 set fish_greeting
+
+source $HOME/.cargo/env.fish
+
+fish_config prompt choose nim
+
 if test -f $HOME/.lightmode
 	fish_config theme choose ayu\ Light
 else
 	fish_config theme choose ayu\ Mirage
 end
-source $HOME/.cargo/env.fish
+
 function shit
 	openssl dgst -sha256 $argv[1]
 end
+
 function lg
 	lazygit
 end
+
 function so
 	source $HOME/.config/fish/config.fish
 end
+
 function lightmode
 	touch $HOME/.lightmode
 	so
 end
+
 function darkmode
 	if test -f $HOME/.lightmode
 		rm $HOME/.lightmode
@@ -51,6 +60,7 @@ function darkmode
 	end
 	so
 end
+
 set -x VISUAL nvim
 set -x EDITOR nvim
 set -x DOTNET_ROOT /usr/local/share/dotnet
