@@ -1,4 +1,4 @@
-theme = dark:ayu,light:ayu_light
+theme = dark:tokyonight-storm,light:tokyonight-day
 macos-icon = retro
 font-thicken = true
 macos-titlebar-style = hidden
