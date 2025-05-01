@@ -3,7 +3,12 @@ set fish_greeting
 source $HOME/.cargo/env.fish
 
 fish_config prompt choose nim
-fish_config theme choose ayu\ Mirage
+
+if test -f $HOME/.lightmode
+	fish_config theme choose ayu\ Light
+else
+	fish_config theme choose ayu\ Mirage
+end
 
 function shit
 	openssl dgst -sha256 $argv[1]
