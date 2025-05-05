@@ -13,6 +13,6 @@ end
 
 config.window_decorations = "RESIZE"
 config.enable_tab_bar = false
-config.font_size = 16.0
+config.font_size = 18.0
 
 return config
