@@ -1,13 +1,3 @@
-call plug#begin()
-
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-sleuth'
-
-call plug#end()
-
 " Config
 
 set termguicolors
@@ -16,10 +6,6 @@ colorscheme slate
 set grepprg=rg\ --vimgrep\ --smart-case\ --follow
 
 let mapleader = " "
-
-nnoremap <silent> <leader>g :GFiles<CR>
-nnoremap <silent> <leader>f :Files<CR>
-nnoremap <silent> <leader>b :Buffers<CR>
 
 map <C-j> <C-W>j
 map <C-k> <C-W>k

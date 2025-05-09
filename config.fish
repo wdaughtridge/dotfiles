@@ -64,6 +64,6 @@ end
 set -x VISUAL nvim
 set -x EDITOR nvim
 set -x DOTNET_ROOT /usr/local/share/dotnet
-set -x GOPATH $HOME/go
+set -x GOPATH /usr/local/go
 set -x GOBIN $GOPATH/bin
 set -x PATH $GOBIN $HOME/.local/share/nvim/mason/bin $HOME/.dotnet/tools $HOME/.local/bin /opt/homebrew/bin /opt/homebrew/sbin $PATH
