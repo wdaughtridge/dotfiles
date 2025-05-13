@@ -1,6 +1,0 @@
-theme = dark:tokyonight-storm,light:tokyonight-day
-macos-icon = retro
-font-thicken = true
-macos-titlebar-style = hidden
-macos-icon-frame = beige
-minimum-contrast = 2

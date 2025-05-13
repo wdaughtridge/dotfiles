@@ -17,11 +17,11 @@
         content: "{{ lookup('ansible.builtin.file', 'config.fish', rstrip=false) }}"
         mode: "0644"
 
-    - name: Place ghostty config file
+    - name: Place WezTerm config file
       when: ansible_facts['os_family'] == 'Darwin'
       copy:
-        dest: "{{ lookup('env', 'HOME') }}/.config/ghostty/config"
-        content: "{{ lookup('ansible.builtin.file', 'ghostty', rstrip=false) }}"
+        dest: "{{ lookup('env', 'HOME') }}/.wezterm.lua"
+        content: "{{ lookup('ansible.builtin.file', 'wezterm.lua', rstrip=false) }}"
         mode: "0644"
 
     - name: Place tmux config file
