@@ -8,7 +8,7 @@
     - name: Place git config file
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.gitconfig"
-        content: "{{ lookup('ansible.builtin.file', '.gitconfig', rstrip=false) }}"
+        content: "{{ lookup('ansible.builtin.file', 'gitconfig', rstrip=false) }}"
         mode: "0644"
 
     - name: Place fish config file
@@ -33,5 +33,5 @@
     - name: Place vim config file
       copy:
         dest: "{{ lookup('env', 'HOME') }}/.vimrc"
-        content: "{{ lookup('ansible.builtin.file', '.vimrc', rstrip=false) }}"
+        content: "{{ lookup('ansible.builtin.file', 'vimrc', rstrip=false) }}"
         mode: "0644"
