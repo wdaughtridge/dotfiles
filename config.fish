@@ -1,3 +1,7 @@
+if test $CWD
+	cd $CWD
+end
+
 set fish_greeting
 
 source $HOME/.cargo/env.fish

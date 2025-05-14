@@ -34,13 +34,6 @@
         state: directory
         mode: "0755"
 
-    - name: Ensure .config/ghostty directory
-      when: ansible_facts['os_family'] == 'Darwin'
-      file:
-        path: "{{ lookup('env', 'HOME') }}/.config/ghostty"
-        state: directory
-        mode: "0755"
-
     - name: Ensure base .vim directory
       file:
         path: "{{ lookup('env', 'HOME') }}/.vim"

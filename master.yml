@@ -1,3 +1,2 @@
 - import_playbook: create-config-dirs.yml
 - import_playbook: create-config-files.yml
-- import_playbook: create-exec-scripts.yml
