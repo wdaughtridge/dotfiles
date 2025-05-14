@@ -8,21 +8,29 @@ local act = wezterm.action
 
 config.use_fancy_tab_bar = false
 
+config.leader = { key = '\\', mods = 'CTRL', timeout_milliseconds = 1000 }
+
+-- Update the workspace name in window
 wezterm.on('update-right-status', function(window, pane)
   window:set_right_status(window:active_workspace())
 end)
 
-config.leader = { key = '\\', mods = 'CTRL', timeout_milliseconds = 1000 }
+-- Start in terminal workspace
+wezterm.on('mux-startup', function()
+  local _, _, window = mux.spawn_window {}
+  window:set_workspace('terminal')
+end)
 
+-- Poll for workspace change in temp file
 wezterm.on('poll-workspace', function(window, pane)
-  wezterm.log_info('Polling temp workspace file')
-
   local temp_file = wezterm.GLOBAL.workspace_temp_file
+
   local f = io.open(temp_file, 'r')
   if f ~= nil then
     local result = f:read('*l')
     f:close()
 
+    -- Is there anything in the file?
     if result ~= nil and #result > 0 then
       os.remove(temp_file)
 
@@ -66,7 +74,7 @@ wezterm.on('switch-workspace', function(window, pane)
     end
   end
 
-  local tab, fzf_pane, _ = mux.spawn_window {
+  window:mux_window():spawn_tab {
     args = {
       '/opt/homebrew/bin/fish', '-c',
       string.format('echo "%s" | /opt/homebrew/bin/fzf > %s', projects, temp_file)
@@ -85,6 +93,20 @@ wezterm.on('switch-workspace', function(window, pane)
 end)
 
 config.keys = {
+  {
+    key = 'S',
+    mods = 'LEADER',
+    action = act.ShowLauncherArgs {
+      flags = 'FUZZY|WORKSPACES',
+    },
+  },
+  {
+    key = 's',
+    mods = 'LEADER',
+    action = act.ShowLauncherArgs {
+      flags = 'WORKSPACES',
+    },
+  },
   {
     key = 'f',
     mods = 'LEADER',
