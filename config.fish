@@ -9,7 +9,7 @@ source $HOME/.cargo/env.fish
 fish_config prompt choose nim
 
 if test -f $HOME/.lightmode
-	fish_config theme choose ayu\ Light
+	fish_config theme choose Snow\ Day
 else
 	fish_config theme choose ayu\ Mirage
 end

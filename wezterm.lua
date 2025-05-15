@@ -7,6 +7,15 @@ local mux = wezterm.mux
 local action = wezterm.action
 local projects_dir = wezterm.home_dir .. '/Developer'
 
+local home = os.getenv("HOME")
+local light = io.open(home .. "/.lightmode","r")
+if light ~= nil then
+  io.close(light)
+  config.color_scheme = 'tokyonight-day'
+else
+  config.color_scheme = 'tokyonight-storm'
+end
+
 -- Make tabs look retro
 config.use_fancy_tab_bar = false
 
