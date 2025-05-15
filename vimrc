@@ -1,16 +1,11 @@
 " Config
 
 set termguicolors
-colorscheme slate
+colorscheme sorbet
 
 set grepprg=rg\ --vimgrep\ --smart-case\ --follow
 
 let mapleader = " "
-
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
 
 map Q <Nop>
 
@@ -42,5 +37,3 @@ set signcolumn=yes
 set backupdir=~/.vim/backup/
 set directory=~/.vim/swap/
 set undodir=~/.vim/undo/
-
-hi Normal guibg=NONE ctermbg=NONE
