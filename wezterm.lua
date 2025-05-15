@@ -17,12 +17,6 @@ config.leader = {
   timeout_milliseconds = 1000
 }
 
--- Start in terminal workspace
-wezterm.on('mux-startup', function()
-  local _, _, window = mux.spawn_window {}
-  window:set_workspace('terminal')
-end)
-
 -- Update the workspace name in window
 wezterm.on('update-right-status', function(window, pane)
   window:set_right_status(window:active_workspace())
