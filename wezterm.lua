@@ -1,19 +1,21 @@
-local wezterm = require("wezterm")
-local io = require 'io'
-local os = require 'os'
+local wezterm = require('wezterm')
+local io = require('io')
+local os = require('os')
 
 local config = wezterm.config_builder()
 local mux = wezterm.mux
-local act = wezterm.action
+local action = wezterm.action
+local projects_dir = wezterm.home_dir .. '/Developer'
 
+-- Make tabs look retro
 config.use_fancy_tab_bar = false
 
-config.leader = { key = '\\', mods = 'CTRL', timeout_milliseconds = 1000 }
-
--- Update the workspace name in window
-wezterm.on('update-right-status', function(window, pane)
-  window:set_right_status(window:active_workspace())
-end)
+-- Old tmux leader I am used to
+config.leader = {
+  key = '\\',
+  mods = 'CTRL',
+  timeout_milliseconds = 1000
+}
 
 -- Start in terminal workspace
 wezterm.on('mux-startup', function()
@@ -21,10 +23,18 @@ wezterm.on('mux-startup', function()
   window:set_workspace('terminal')
 end)
 
+-- Update the workspace name in window
+wezterm.on('update-right-status', function(window, pane)
+  window:set_right_status(window:active_workspace())
+end)
+
 -- Poll for workspace change in temp file
 wezterm.on('poll-workspace', function(window, pane)
+  -- This is set in the caller when workspace change is requested. I do wish
+  -- we could pass this as an argument though
   local temp_file = wezterm.GLOBAL.workspace_temp_file
 
+  -- Try to open the temp file which will probably always work
   local f = io.open(temp_file, 'r')
   if f ~= nil then
     local result = f:read('*l')
@@ -34,13 +44,14 @@ wezterm.on('poll-workspace', function(window, pane)
     if result ~= nil and #result > 0 then
       os.remove(temp_file)
 
-      local projects_dir = wezterm.home_dir .. '/Developer'
-
       wezterm.log_info('Selected workspace: ' .. result)
       wezterm.log_info('Working dir: ' .. projects_dir .. '/' .. result)
 
+      -- Actually switch to the new workspace with some environment
+      -- variables set. My fish config checks for CWD, and if it is
+      -- present, cd's to it
       window:perform_action(
-        act.SwitchToWorkspace {
+        action.SwitchToWorkspace {
           name = result,
 	  spawn = {
             set_environment_variables = {
@@ -52,8 +63,9 @@ wezterm.on('poll-workspace', function(window, pane)
         pane
       )
     else
+      -- Recurse!
       window:perform_action(
-        act.EmitEvent('poll-workspace'),
+        action.EmitEvent('poll-workspace'),
         pane
       )
     end
@@ -62,18 +74,20 @@ end)
 
 wezterm.on('switch-workspace', function(window, pane)
   local temp_file = os.tmpname()
+  local projects = ''
 
-  local projects_dir = wezterm.home_dir .. '/Developer'
-  local projects = ""
-
-  for dir in io.popen("ls " .. projects_dir):lines() do
-    if projects == "" then
+  -- Just list out files in the projects dir... I wonder if there
+  -- is a better way to do this without invoking ls
+  for dir in io.popen('ls ' .. projects_dir):lines() do
+    if projects == '' then
       projects = dir
     else
       projects = projects .. '\n' .. dir
     end
   end
 
+  -- Think we need to invoke a shell here due to how fzf works, but
+  -- maybe not?
   window:mux_window():spawn_tab {
     args = {
       '/opt/homebrew/bin/fish', '-c',
@@ -81,38 +95,42 @@ wezterm.on('switch-workspace', function(window, pane)
     },
   }
 
-  wezterm.log_info('Waiting for fzf result...')
-
+  -- TODO: can we pass this as an argument?
   wezterm.GLOBAL.workspace_temp_file = temp_file
   wezterm.log_info('Temp file: ' .. wezterm.GLOBAL.workspace_temp_file)
 
+  -- Actually poll for a response from user
   window:perform_action(
-    act.EmitEvent('poll-workspace'),
+    action.EmitEvent('poll-workspace'),
     pane
   )
 end)
 
 config.keys = {
   {
-    key = 'S',
+    key = 'w',
     mods = 'LEADER',
-    action = act.ShowLauncherArgs {
+    action = action.ShowLauncherArgs {
       flags = 'FUZZY|WORKSPACES',
     },
   },
   {
     key = 's',
     mods = 'LEADER',
-    action = act.ShowLauncherArgs {
+    action = action.ShowLauncherArgs {
       flags = 'WORKSPACES',
     },
   },
   {
     key = 'f',
     mods = 'LEADER',
-    action = act.EmitEvent('switch-workspace'),
+    action = action.EmitEvent('switch-workspace'),
   },
-  { key = 'L', mods = 'CTRL', action = act.ShowDebugOverlay },
+  {
+    key = 'L',
+    mods = 'CTRL',
+    action = action.ShowDebugOverlay
+  },
 }
 
 return config
