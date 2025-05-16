@@ -11,9 +11,9 @@ local home = os.getenv("HOME")
 local light = io.open(home .. "/.lightmode","r")
 if light ~= nil then
   io.close(light)
-  config.color_scheme = 'tokyonight-day'
+  config.color_scheme = 'Windows 10 Light (base16)'
 else
-  config.color_scheme = 'tokyonight-storm'
+  config.color_scheme = 'Windows 10 (base16)'
 end
 
 -- Make tabs look retro
