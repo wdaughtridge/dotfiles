@@ -34,6 +34,9 @@ wezterm.on('update-right-status', function(window, _)
   window:set_right_status(window:active_workspace())
 end)
 
+wezterm.GLOBAL.last_workspace = 'default'
+wezterm.GLOBAL.current_workspace = 'default'
+
 -- Poll for workspace change in temp file
 wezterm.on('poll-workspace', function(window, pane)
   -- This is set in the caller when workspace change is requested. I do wish
@@ -48,6 +51,9 @@ wezterm.on('poll-workspace', function(window, pane)
 
     -- Is there anything in the file?
     if result ~= nil and #result > 0 then
+      wezterm.GLOBAL.last_workspace = wezterm.GLOBAL.current_workspace
+      wezterm.GLOBAL.current_workspace = wezterm.GLOBAL.last_workspace
+
       os.remove(temp_file)
 
       wezterm.log_info('Selected workspace: ' .. result)
@@ -76,6 +82,25 @@ wezterm.on('poll-workspace', function(window, pane)
       )
     end
   end
+end)
+
+wezterm.on('switch-last-workspace', function(window, pane)
+  local temp = wezterm.GLOBAL.last_workspace
+  wezterm.GLOBAL.last_workspace = wezterm.GLOBAL.current_workspace
+  wezterm.GLOBAL.current_workspace = temp
+
+  window:perform_action(
+    action.SwitchToWorkspace {
+      name = temp,
+      spawn = {
+        set_environment_variables = {
+          CWD = projects_dir .. '/' .. temp,
+        },
+        args = { '/opt/homebrew/bin/fish' },
+      },
+    },
+    pane
+  )
 end)
 
 wezterm.on('switch-workspace', function(window, pane)
@@ -126,6 +151,18 @@ config.keys = {
     action = action.ShowLauncherArgs {
       flags = 'WORKSPACES',
     },
+  },
+  {
+    key = 't',
+    mods = 'LEADER',
+    action = action.SwitchToWorkspace {
+      name = 'default',
+    },
+  },
+  {
+    key = 'L',
+    mods = 'LEADER',
+    action = action.EmitEvent('switch-last-workspace'),
   },
   {
     key = 'f',
