@@ -3,7 +3,6 @@ local io = require('io')
 local os = require('os')
 
 local config = wezterm.config_builder()
-local mux = wezterm.mux
 local action = wezterm.action
 local projects_dir = wezterm.home_dir .. '/Developer'
 
@@ -16,6 +15,10 @@ else
   config.color_scheme = 'Windows 10 (base16)'
 end
 
+-- Opacity
+-- This is not so nice when stage manager is off
+config.window_background_opacity = 0.8
+
 -- Make tabs look retro
 config.use_fancy_tab_bar = false
 
@@ -27,7 +30,7 @@ config.leader = {
 }
 
 -- Update the workspace name in window
-wezterm.on('update-right-status', function(window, pane)
+wezterm.on('update-right-status', function(window, _)
   window:set_right_status(window:active_workspace())
 end)
 
