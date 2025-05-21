@@ -78,7 +78,7 @@ wezterm.on('poll-workspace', function(window, pane)
   end
 end)
 
--- Gitui
+-- Gitui (could be lazygit, too)
 wezterm.on('gitui', function(window, _)
   window:mux_window():spawn_tab {
     args = {
