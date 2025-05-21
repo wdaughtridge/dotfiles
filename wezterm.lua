@@ -121,7 +121,25 @@ wezterm.on('switch-workspace', function(window, pane)
   )
 end)
 
+wezterm.on('split-horizontal', function(_, pane)
+  pane:split {}
+end)
+
+wezterm.on('split-vertical', function(_, pane)
+  pane:split { direction = 'Bottom' }
+end)
+
 config.keys = {
+  {
+    key = '"',
+    mods = 'LEADER',
+    action = action.EmitEvent('split-vertical'),
+  },
+  {
+    key = '%',
+    mods = 'LEADER',
+    action = action.EmitEvent('split-horizontal'),
+  },
   {
     key = 'w',
     mods = 'LEADER',
