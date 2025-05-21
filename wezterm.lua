@@ -17,7 +17,7 @@ end
 
 -- Opacity
 -- This is not so nice when stage manager is off
-config.window_background_opacity = 0.8
+config.window_background_opacity = 0.9
 
 -- Make tabs look retro
 config.use_fancy_tab_bar = false
