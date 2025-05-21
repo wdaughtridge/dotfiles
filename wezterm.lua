@@ -157,9 +157,17 @@ config.keys = {
     mods = "LEADER",
     action = action.EmitEvent("split-horizontal"),
   },
-  -- Search workspaces
+  -- Pick workspaces
   {
     key = "s",
+    mods = "LEADER",
+    action = action.ShowLauncherArgs {
+      flags = "WORKSPACES",
+    },
+  },
+  -- Search workspaces
+  {
+    key = "S",
     mods = "LEADER",
     action = action.ShowLauncherArgs {
       flags = "FUZZY|WORKSPACES",
