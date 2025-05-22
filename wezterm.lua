@@ -104,24 +104,13 @@ end)
 
 wezterm.on("switch-workspace", function(window, pane)
   local temp_file = os.tmpname()
-  local projects = ""
-
-  -- Just list out files in the projects dir... I wonder if there
-  -- is a better way to do this without invoking ls
-  for dir in io.popen("ls " .. projects_dir):lines() do
-    if projects == "" then
-      projects = dir
-    else
-      projects = projects .. "\n" .. dir
-    end
-  end
 
   -- Think we need to invoke a shell here due to how fzf works, but
   -- maybe not?
   window:mux_window():spawn_tab {
     args = {
       "/opt/homebrew/bin/fish", "-c",
-      string.format("echo '%s' | /opt/homebrew/bin/fzf > %s", projects, temp_file)
+      string.format("ls %s | /opt/homebrew/bin/fzf > %s", projects_dir, temp_file)
     },
   }
 
