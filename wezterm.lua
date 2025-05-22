@@ -109,7 +109,7 @@ wezterm.on("switch-workspace", function(window, pane)
   -- maybe not?
   window:mux_window():spawn_tab {
     args = {
-      "/opt/homebrew/bin/fish", "-c",
+      "/opt/homebrew/bin/bash", "-c",
       string.format("ls %s | /opt/homebrew/bin/fzf > %s", projects_dir, temp_file)
     },
   }
