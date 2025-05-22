@@ -105,12 +105,14 @@ end)
 wezterm.on("switch-workspace", function(window, pane)
   local temp_file = os.tmpname()
 
+  local fzf_opts = '--color=fg:#d0d0d0,fg+:#d0d0d0 --color=hl:#5f87af,hl+:#5fd7ff,info:#afaf87,marker:#87ff00 --color=prompt:#d7005f,spinner:#af5fff,pointer:#af5fff,header:#87afaf --color=border:#262626,label:#aeaeae,query:#d9d9d9 --border="rounded" --border-label="" --preview-window="border-rounded" --prompt="> " --marker=">" --pointer="◆" --separator="=" --scrollbar="|"'
+
   -- Think we need to invoke a shell here due to how fzf works, but
   -- maybe not?
   window:mux_window():spawn_tab {
     args = {
       "/opt/homebrew/bin/bash", "-c",
-      string.format("ls %s | /opt/homebrew/bin/fzf > %s", projects_dir, temp_file)
+      string.format("ls %s | /opt/homebrew/bin/fzf %s > %s", projects_dir, fzf_opts, temp_file)
     },
   }
 
