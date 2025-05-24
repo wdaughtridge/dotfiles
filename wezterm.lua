@@ -136,6 +136,29 @@ wezterm.on("switch-workspace", function(window, pane)
   )
 end)
 
+wezterm.on("kubectl-get-pods", function (window, _)
+  local tabs = window:mux_window():tabs()
+
+  -- Activate lazygit tab if exists
+  for _, tab in pairs(tabs) do
+    local title = tab:get_title()
+    if title == "kubectl-get-pods" then
+      tab:activate()
+      return
+    end
+  end
+
+  -- Otherwise we need to create a new tab
+  local tab, _, _ = window:mux_window():spawn_tab {
+    args = {
+      "/opt/homebrew/bin/bash", "-c", "/opt/homebrew/bin/watch exec '/opt/homebrew/bin/kubectl get pods -A'"
+    },
+  }
+
+  -- And set the title so we can query it later
+  tab:set_title("kubectl-get-pods")
+end)
+
 -- Tmux-like splits
 wezterm.on("split-horizontal", function(_, pane)
   pane:split {}
@@ -192,6 +215,12 @@ config.keys = {
     key = "f",
     mods = "LEADER",
     action = action.EmitEvent("switch-workspace"),
+  },
+  -- Check on K8s pods
+  {
+    key = "k",
+    mods = "LEADER",
+    action = action.EmitEvent("kubectl-get-pods"),
   },
   -- WezTerm debug
   {
