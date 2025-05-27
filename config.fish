@@ -6,7 +6,7 @@ set fish_greeting
 
 source $HOME/.cargo/env.fish
 
-fish_config prompt choose nim
+fish_config prompt choose minimalist
 
 if test -f $HOME/.lightmode
 	fish_config theme choose Snow\ Day
