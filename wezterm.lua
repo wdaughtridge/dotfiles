@@ -38,6 +38,18 @@ config.leader = {
   timeout_milliseconds = 1000
 }
 
+wezterm.on("toggle-transparency", function (window, pane)
+  local overrides = window:get_config_overrides() or {}
+    if not overrides.window_background_opacity then
+        -- if no override is setup, override the default opacity value with 1.0
+        overrides.window_background_opacity = 1.0
+    else
+        -- if there is an override, make it nil so the opacity goes back to the default
+        overrides.window_background_opacity = nil
+    end
+    window:set_config_overrides(overrides)
+end)
+
 -- Update the workspace name in window
 wezterm.on("update-right-status", function(window, _)
   window:set_right_status(window:active_workspace())
@@ -168,6 +180,11 @@ wezterm.on("split-vertical", function(_, pane)
 end)
 
 config.keys = {
+  {
+    key = "T",
+    mods = "LEADER",
+    action = action.EmitEvent("toggle-transparency"),
+  },
   -- Split down
   {
     key = "\"",
