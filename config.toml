@@ -2,7 +2,10 @@ theme = "transparent"
 
 [editor]
 line-number = "relative"
-mouse = false
+auto-pairs = false
+
+[editor.lsp]
+auto-signature-help = false
 
 [editor.cursor-shape]
 insert = "bar"

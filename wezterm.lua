@@ -7,7 +7,7 @@ local action = wezterm.action
 local projects_dir = wezterm.home_dir .. "/Developer"
 
 local home = os.getenv("HOME")
-local light = io.open(home .. "/.lightmode","r")
+local light = io.open(home .. "/.lightmode", "r")
 if light ~= nil then
   io.close(light)
   config.color_scheme = "Windows 10 Light (base16)"
@@ -38,16 +38,16 @@ config.leader = {
   timeout_milliseconds = 1000
 }
 
-wezterm.on("toggle-transparency", function (window, pane)
+wezterm.on("toggle-transparency", function(window, _)
   local overrides = window:get_config_overrides() or {}
-    if not overrides.window_background_opacity then
-        -- if no override is setup, override the default opacity value with 1.0
-        overrides.window_background_opacity = 1.0
-    else
-        -- if there is an override, make it nil so the opacity goes back to the default
-        overrides.window_background_opacity = nil
-    end
-    window:set_config_overrides(overrides)
+  if not overrides.window_background_opacity then
+    -- if no override is set up, override the default opacity value with 1.0
+    overrides.window_background_opacity = 1.0
+  else
+    -- if there is an override, make it nil so the opacity goes back to the default
+    overrides.window_background_opacity = nil
+  end
+  window:set_config_overrides(overrides)
 end)
 
 -- Update the workspace name in window
@@ -80,7 +80,7 @@ wezterm.on("poll-workspace", function(window, pane)
       window:perform_action(
         action.SwitchToWorkspace {
           name = result,
-	  spawn = {
+          spawn = {
             set_environment_variables = {
               CWD = projects_dir .. "/" .. result,
             },
@@ -126,7 +126,8 @@ end)
 wezterm.on("switch-workspace", function(window, pane)
   local temp_file = os.tmpname()
 
-  local fzf_opts = '--color=fg:#d0d0d0,fg+:#d0d0d0 --color=hl:#5f87af,hl+:#5fd7ff,info:#afaf87,marker:#87ff00 --color=prompt:#d7005f,spinner:#af5fff,pointer:#af5fff,header:#87afaf --color=border:#262626,label:#aeaeae,query:#d9d9d9 --border="rounded" --border-label="" --preview-window="border-rounded" --prompt="> " --marker=">" --pointer="◆" --separator="=" --scrollbar="|"'
+  local fzf_opts =
+  '--color=fg:#d0d0d0,fg+:#d0d0d0 --color=hl:#5f87af,hl+:#5fd7ff,info:#afaf87,marker:#87ff00 --color=prompt:#d7005f,spinner:#af5fff,pointer:#af5fff,header:#87afaf --color=border:#262626,label:#aeaeae,query:#d9d9d9 --border="rounded" --border-label="" --preview-window="border-rounded" --prompt="> " --marker=">" --pointer="◆" --separator="=" --scrollbar="|"'
 
   -- Think we need to invoke a shell here due to how fzf works, but
   -- maybe not?
@@ -148,7 +149,7 @@ wezterm.on("switch-workspace", function(window, pane)
   )
 end)
 
-wezterm.on("kubectl-get-pods", function (window, _)
+wezterm.on("kubectl-get-pods", function(window, _)
   local tabs = window:mux_window():tabs()
 
   -- Activate lazygit tab if exists
