@@ -206,9 +206,7 @@ config.keys = {
   {
     key = "s",
     mods = "LEADER",
-    action = action.ShowLauncherArgs {
-      flags = "WORKSPACES",
-    },
+    action = action.EmitEvent("switch-workspace"),
   },
   -- Search workspaces
   {
