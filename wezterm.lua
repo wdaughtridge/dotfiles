@@ -60,6 +60,7 @@ wezterm.on("poll-workspace", function(window, pane)
   -- This is set in the caller when workspace change is requested. I do wish
   -- we could pass this as an argument though
   local temp_file = wezterm.GLOBAL.workspace_temp_file
+  local caller_pane = wezterm.mux.get_pane(wezterm.GLOBAL.caller_pane_id)
 
   -- Try to open the temp file which will probably always work
   local f = io.open(temp_file, "r")
@@ -87,13 +88,13 @@ wezterm.on("poll-workspace", function(window, pane)
             args = { "/opt/homebrew/bin/fish" },
           },
         },
-        pane
+        caller_pane
       )
     else
       -- Recurse!
       window:perform_action(
         action.EmitEvent("poll-workspace"),
-        pane
+        caller_pane
       )
     end
   end
@@ -140,12 +141,14 @@ wezterm.on("switch-workspace", function(window, pane)
 
   -- TODO: can we pass this as an argument?
   wezterm.GLOBAL.workspace_temp_file = temp_file
+  wezterm.GLOBAL.caller_pane_id = pane:pane_id()
   wezterm.log_info("Temp file: " .. wezterm.GLOBAL.workspace_temp_file)
+  wezterm.log_info("Caller pane: " .. wezterm.GLOBAL.caller_pane_id)
 
   -- Actually poll for a response from user
   window:perform_action(
     action.EmitEvent("poll-workspace"),
-    pane
+    wezterm.mux.get_pane(wezterm.GLOBAL.caller_pane_id)
   )
 end)
 
@@ -181,6 +184,7 @@ wezterm.on("split-vertical", function(_, pane)
 end)
 
 config.keys = {
+  -- Transparency
   {
     key = "T",
     mods = "LEADER",
