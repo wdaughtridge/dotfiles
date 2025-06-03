@@ -56,7 +56,7 @@ wezterm.on("update-right-status", function(window, _)
 end)
 
 -- Poll for workspace change in temp file
-wezterm.on("poll-workspace", function(window, pane)
+wezterm.on("poll-workspace", function(window, _)
   -- This is set in the caller when workspace change is requested. I do wish
   -- we could pass this as an argument though
   local temp_file = wezterm.GLOBAL.workspace_temp_file
@@ -124,6 +124,22 @@ wezterm.on("lazygit", function(window, _)
   tab:set_title("lazygit")
 end)
 
+wezterm.on("switch-project", function(window, pane)
+  wezterm.GLOBAL.current_workspace_query = false
+  window:perform_action(
+    action.EmitEvent("switch-workspace"),
+    pane
+  )
+end)
+
+wezterm.on("switch-existing", function(window, pane)
+  wezterm.GLOBAL.current_workspace_query = true
+  window:perform_action(
+    action.EmitEvent("switch-workspace"),
+    pane
+  )
+end)
+
 wezterm.on("switch-workspace", function(window, pane)
   local temp_file = os.tmpname()
 
@@ -132,10 +148,24 @@ wezterm.on("switch-workspace", function(window, pane)
 
   -- Think we need to invoke a shell here due to how fzf works, but
   -- maybe not?
+  local workspaces = nil
+  wezterm.log_info(wezterm.GLOBAL.current_workspace_query)
+  if wezterm.GLOBAL.current_workspace_query then
+    workspaces = "echo -e '"
+    for _, workspace in pairs(wezterm.mux.get_workspace_names()) do
+      workspaces = workspaces .. workspace .. "\\n"
+    end
+    workspaces = string.sub(workspaces, 1, string.len(workspaces) - 2)
+    workspaces = workspaces .. "'"
+    wezterm.log_info(workspaces)
+  else
+    workspaces = string.format("ls %s", projects_dir)
+  end
+
   window:mux_window():spawn_tab {
     args = {
       "/opt/homebrew/bin/bash", "-c",
-      string.format("ls %s | /opt/homebrew/bin/fzf %s > %s", projects_dir, fzf_opts, temp_file)
+      string.format("%s | /opt/homebrew/bin/fzf %s > %s", workspaces, fzf_opts, temp_file)
     },
   }
 
@@ -206,7 +236,7 @@ config.keys = {
   {
     key = "s",
     mods = "LEADER",
-    action = action.EmitEvent("switch-workspace"),
+    action = action.EmitEvent("switch-existing"),
   },
   -- Search workspaces
   {
@@ -234,7 +264,7 @@ config.keys = {
   {
     key = "f",
     mods = "LEADER",
-    action = action.EmitEvent("switch-workspace"),
+    action = action.EmitEvent("switch-project"),
   },
   -- Check on K8s pods
   {
