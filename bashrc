@@ -4,6 +4,6 @@ if [ -n $CWD ]; then
 	cd $CWD
 fi
 
-export VISUAL=nvim
-export EDITOR=nvim
+export VISUAL=hx
+export EDITOR=hx
 export PATH=$HOME/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH

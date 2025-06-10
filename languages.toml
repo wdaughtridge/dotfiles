@@ -23,3 +23,22 @@ language-servers = [ "scls" ]
 [[language]]
 name = "git-commit"
 language-servers = [ "scls" ]
+
+[[language]]
+name = "python"
+language-servers = [ "jedi", "ruff" ]
+auto-format = true
+
+[[language]]
+name = "typescript"
+scope = "source.ts"
+injection-regex = "(ts|typescript)"
+language-id = "typescript"
+file-types = ["ts", "mts", "cts"]
+shebangs = ["deno", "bun", "ts-node"]
+roots = [ "package.json", "tsconfig.json" ]
+comment-token = "//"
+block-comment-tokens = { start = "/*", end = "*/" }
+language-servers = [ "typescript-language-server" ]
+formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
+indent = { tab-width = 2, unit = "  " }
