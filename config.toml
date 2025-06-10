@@ -2,7 +2,11 @@ theme = "transparent"
 
 [editor]
 line-number = "relative"
-auto-pairs = false
+
+[editor.auto-pairs]
+"(" = ")"
+"{" = "}"
+"[" = "]"
 
 [editor.lsp]
 auto-signature-help = false
