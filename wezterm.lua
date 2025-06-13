@@ -197,7 +197,8 @@ wezterm.on("kubectl-get-pods", function(window, _)
   -- Otherwise we need to create a new tab
   local tab, _, _ = window:mux_window():spawn_tab {
     args = {
-      "/opt/homebrew/bin/k9s", "--splashless"
+      "/opt/homebrew/bin/fish", "-c",
+      "/opt/homebrew/bin/k9s --splashless"
     },
   }
 
