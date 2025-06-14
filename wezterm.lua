@@ -22,11 +22,14 @@ config.window_padding = {
   bottom = 0,
 }
 
+config.color_scheme = 'Gruvbox dark, hard (base16)'
+
 config.window_decorations = "RESIZE"
 
 -- Opacity
 -- This is not so nice when stage manager is off
 config.window_background_opacity = 0.9
+config.macos_window_background_blur = 20
 
 -- Make tabs look retro
 config.use_fancy_tab_bar = false

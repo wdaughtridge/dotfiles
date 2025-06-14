@@ -1,3 +1,3 @@
-inherits = "night_owl"
-"ui.background" ={}
-"ui.gutter" ={}
+inherits = "gruvbox_dark_hard"
+"ui.background" = {}
+"ui.gutter" = {}
