@@ -145,6 +145,15 @@ wezterm.on("switch-existing", function(window, pane)
   )
 end)
 
+wezterm.on("new-shell", function(window, pane)
+  window:perform_action(
+    wezterm.action.SpawnCommandInNewTab {
+      args = { '/opt/homebrew/bin/bash' },
+    },
+    pane
+  )
+end)
+
 wezterm.on("switch-workspace", function(window, pane)
   local temp_file = os.tmpname()
 
@@ -157,7 +166,7 @@ wezterm.on("switch-workspace", function(window, pane)
   wezterm.log_info(wezterm.GLOBAL.current_workspace_query)
   if wezterm.GLOBAL.current_workspace_query then
     workspaces = "echo -e '"
-    active_workspace = window:active_workspace()
+    local active_workspace = window:active_workspace()
     workspaces = workspaces .. active_workspace .. "\\n"
     for _, workspace in pairs(wezterm.mux.get_workspace_names()) do
       if workspace ~= active_workspace then
@@ -224,6 +233,11 @@ wezterm.on("split-vertical", function(_, pane)
 end)
 
 config.keys = {
+  {
+    key = "t",
+    mods = "CMD",
+    action = action.EmitEvent("new-shell"),
+  },
   -- Transparency
   {
     key = "T",
