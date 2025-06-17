@@ -90,7 +90,7 @@ wezterm.on("poll-workspace", function(window, _)
             set_environment_variables = {
               CWD = projects_dir .. "/" .. result,
             },
-            args = { "/opt/homebrew/bin/bash" },
+            args = { "/opt/homebrew/bin/bash", "--login" },
           },
         },
         caller_pane
@@ -148,7 +148,7 @@ end)
 wezterm.on("new-shell", function(window, pane)
   window:perform_action(
     wezterm.action.SpawnCommandInNewTab {
-      args = { '/opt/homebrew/bin/bash' },
+      args = { "/opt/homebrew/bin/bash", "--login" },
     },
     pane
   )
@@ -215,7 +215,7 @@ wezterm.on("kubectl-get-pods", function(window, _)
   -- Otherwise we need to create a new tab
   local tab, _, _ = window:mux_window():spawn_tab {
     args = {
-      "/opt/homebrew/bin/bash", "-c",
+      "/opt/homebrew/bin/bash", "--login", "-c",
       "/opt/homebrew/bin/k9s --splashless --logoless"
     },
   }
