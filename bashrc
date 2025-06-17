@@ -31,4 +31,4 @@ export FZF_DEFAULT_OPTS='--layout="reverse" \
 	--scrollbar="|"'
 export VISUAL=hx
 export EDITOR=hx
-export PATH=$HOME/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
+export PATH=$HOME/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/go/bin:$PATH
