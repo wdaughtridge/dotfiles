@@ -1,3 +1,5 @@
+# @location $HOME/.config/helix/themes/transparent.toml
+
 inherits = "carbonfox"
 "ui.background" = {}
 "ui.gutter" = {}

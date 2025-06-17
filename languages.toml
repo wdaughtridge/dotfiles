@@ -1,3 +1,5 @@
+# @location $HOME/.config/helix/languages.toml
+
 [language-server.scls]
 command = "simple-completion-language-server"
 

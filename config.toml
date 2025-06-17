@@ -1,3 +1,5 @@
+# @location $HOME/.config/helix/config.toml
+
 theme = "transparent"
 
 [editor]

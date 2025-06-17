@@ -1,3 +1,5 @@
+# @location $HOME/.config/fish/config.fish
+
 if test $CWD
     cd $CWD
 end
