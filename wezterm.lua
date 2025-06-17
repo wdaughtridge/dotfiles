@@ -79,7 +79,7 @@ wezterm.on("poll-workspace", function(window, _)
       wezterm.log_info("Working dir: " .. projects_dir .. "/" .. result)
 
       -- Actually switch to the new workspace with some environment
-      -- variables set. My fish config checks for CWD, and if it is
+      -- variables set. My shell config checks for CWD, and if it is
       -- present, cd"s to it
       window:perform_action(
         action.SwitchToWorkspace {
@@ -88,7 +88,7 @@ wezterm.on("poll-workspace", function(window, _)
             set_environment_variables = {
               CWD = projects_dir .. "/" .. result,
             },
-            args = { "/opt/homebrew/bin/fish" },
+            args = { "/opt/homebrew/bin/bash" },
           },
         },
         caller_pane
@@ -200,7 +200,7 @@ wezterm.on("kubectl-get-pods", function(window, _)
   -- Otherwise we need to create a new tab
   local tab, _, _ = window:mux_window():spawn_tab {
     args = {
-      "/opt/homebrew/bin/fish", "-c",
+      "/opt/homebrew/bin/bash", "-c",
       "/opt/homebrew/bin/k9s --splashless --logoless"
     },
   }
