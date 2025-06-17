@@ -157,8 +157,12 @@ wezterm.on("switch-workspace", function(window, pane)
   wezterm.log_info(wezterm.GLOBAL.current_workspace_query)
   if wezterm.GLOBAL.current_workspace_query then
     workspaces = "echo -e '"
+    active_workspace = window:active_workspace()
+    workspaces = workspaces .. active_workspace .. "\\n"
     for _, workspace in pairs(wezterm.mux.get_workspace_names()) do
-      workspaces = workspaces .. workspace .. "\\n"
+      if workspace ~= active_workspace then
+        workspaces = workspaces .. workspace .. "\\n"
+      end
     end
     workspaces = string.sub(workspaces, 1, string.len(workspaces) - 2)
     workspaces = workspaces .. "'"

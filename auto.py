@@ -1,6 +1,5 @@
 import os
 import shutil
-import hashlib
 
 skip = ["auto.py", ".git"]
 
@@ -30,9 +29,10 @@ for name in os.listdir():
                     location = line.split("@location ")
                     location = location[-1]
                     location = location.split(" ")[0]
+                    location = location.strip()
                     location = os.path.expandvars(location)
                     print(f"Copying {name} -> {location}")
-                    shutil.copy(name, location)
+                    shutil.copyfile(name, location)
                     continue
     except Exception as e:
         print(f"Could process {name}: {e}")
