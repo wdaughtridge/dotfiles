@@ -22,7 +22,7 @@ config.window_padding = {
   bottom = 0,
 }
 
-config.color_scheme = 'Gruvbox dark, hard (base16)'
+config.color_scheme = 'carbonfox'
 
 config.window_decorations = "RESIZE"
 
