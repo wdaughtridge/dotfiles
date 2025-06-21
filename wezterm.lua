@@ -145,6 +145,15 @@ wezterm.on("switch-existing", function(window, pane)
   )
 end)
 
+wezterm.on("new-lima-shell", function(window, pane)
+  window:perform_action(
+    wezterm.action.SpawnCommandInNewTab {
+      args = { "/opt/homebrew/bin/limactl", "shell", "rancher" },
+    },
+    pane
+  )
+end)
+
 wezterm.on("new-shell", function(window, pane)
   window:perform_action(
     wezterm.action.SpawnCommandInNewTab {
@@ -233,6 +242,11 @@ wezterm.on("split-vertical", function(_, pane)
 end)
 
 config.keys = {
+  {
+    key = "l",
+    mods = "LEADER",
+    action = action.EmitEvent("new-lima-shell"),
+  },
   {
     key = "t",
     mods = "CMD",
