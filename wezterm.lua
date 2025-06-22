@@ -17,7 +17,7 @@ else
   config.color_scheme = "Windows 10 (base16)"
 end
 
-config.audible_bell = 'Disabled'
+config.audible_bell = "Disabled"
 
 config.window_padding = {
   left = 0,
@@ -26,7 +26,7 @@ config.window_padding = {
   bottom = 0,
 }
 
-config.color_scheme = 'carbonfox'
+config.color_scheme = "carbonfox"
 
 config.window_decorations = "RESIZE"
 
@@ -169,14 +169,14 @@ wezterm.on("switch-workspace", function(window, pane)
   local temp_file = os.tmpname()
 
   local fzf_opts =
-  '--layout="reverse" --color=fg:#d0d0d0,fg+:#d0d0d0 --color=hl:#5f87af,hl+:#5fd7ff,info:#afaf87,marker:#87ff00 --color=prompt:#d7005f,spinner:#af5fff,pointer:#af5fff,header:#87afaf --color=border:#262626,label:#aeaeae,query:#d9d9d9 --border="rounded" --border-label="" --preview-window="border-rounded" --prompt="> " --marker=">" --pointer="◆" --separator="=" --scrollbar="|"'
+  "--layout=\"reverse\" --color=fg:#d0d0d0,fg+:#d0d0d0 --color=hl:#5f87af,hl+:#5fd7ff,info:#afaf87,marker:#87ff00 --color=prompt:#d7005f,spinner:#af5fff,pointer:#af5fff,header:#87afaf --color=border:#262626,label:#aeaeae,query:#d9d9d9 --border=\"rounded\" --border-label=\"\" --preview-window=\"border-rounded\" --prompt=\"> \" --marker=\">\" --pointer=\"◆\" --separator=\"=\" --scrollbar=\"|\""
 
   -- Think we need to invoke a shell here due to how fzf works, but
   -- maybe not?
   local workspaces = nil
   wezterm.log_info(wezterm.GLOBAL.current_workspace_query)
   if wezterm.GLOBAL.current_workspace_query then
-    workspaces = "echo -e '"
+    workspaces = "echo -e \""
     local active_workspace = window:active_workspace()
     workspaces = workspaces .. active_workspace .. "\\n"
     for _, workspace in pairs(wezterm.mux.get_workspace_names()) do
@@ -185,7 +185,7 @@ wezterm.on("switch-workspace", function(window, pane)
       end
     end
     workspaces = string.sub(workspaces, 1, string.len(workspaces) - 2)
-    workspaces = workspaces .. "'"
+    workspaces = workspaces .. "\""
     wezterm.log_info(workspaces)
   else
     workspaces = string.format("ls %s", projects_dir)
@@ -286,7 +286,7 @@ config.keys = {
       flags = "FUZZY|WORKSPACES",
     },
   },
-  -- Go to 'terminal' session
+  -- Go to "terminal" session
   {
     key = "t",
     mods = "LEADER",
