@@ -32,7 +32,7 @@ config.window_decorations = "RESIZE"
 
 -- Opacity
 -- This is not so nice when stage manager is off
-config.window_background_opacity = 0.9
+config.window_background_opacity = 1.0
 config.macos_window_background_blur = 20
 
 -- Make tabs look retro
@@ -49,7 +49,7 @@ wezterm.on("toggle-transparency", function(window, _)
   local overrides = window:get_config_overrides() or {}
   if not overrides.window_background_opacity then
     -- if no override is set up, override the default opacity value with 1.0
-    overrides.window_background_opacity = 1.0
+    overrides.window_background_opacity = 0.9
   else
     -- if there is an override, make it nil so the opacity goes back to the default
     overrides.window_background_opacity = nil
