@@ -1,7 +1,7 @@
 # @location $HOME/.gitconfig
 
 [core]
-  editor = hx
+  editor = vim
   autocrlf = input
 [push]
   autoSetupRemote = true

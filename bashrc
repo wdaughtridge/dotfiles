@@ -29,6 +29,6 @@ export FZF_DEFAULT_OPTS='--layout="reverse" \
 	--pointer="◆" \
 	--separator="=" \
 	--scrollbar="|"'
-export VISUAL=hx
-export EDITOR=hx
+export VISUAL=vim
+export EDITOR=vim
 export PATH=$HOME/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/go/bin:$PATH
