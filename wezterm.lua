@@ -17,6 +17,8 @@ else
   config.color_scheme = "Windows 10 (base16)"
 end
 
+config.audible_bell = 'Disabled'
+
 config.window_padding = {
   left = 0,
   right = 0,
