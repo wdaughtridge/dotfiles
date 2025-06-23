@@ -21,12 +21,16 @@ let mapleader = ' '
 map Q <Nop>
 
 nnoremap <leader>f <cmd>Files<CR> 
+
+" Helixisms
 nnoremap gh g0
-nnoremap gl g$
-nnoremap ge G
 vnoremap gh g0
-vnoremap gl g$
+nnoremap ge G
 vnoremap ge G
+nnoremap gl g$
+vnoremap gl g$
+nnoremap ; <Esc>
+vnoremap ; <Esc>
 
 syntax on
 filetype plugin on
