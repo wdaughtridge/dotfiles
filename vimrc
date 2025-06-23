@@ -24,6 +24,9 @@ nnoremap <leader>f <cmd>Files<CR>
 nnoremap gh g0
 nnoremap gl g$
 nnoremap ge G
+vnoremap gh g0
+vnoremap gl g$
+vnoremap ge G
 
 syntax on
 filetype plugin on
