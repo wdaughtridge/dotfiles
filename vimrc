@@ -31,6 +31,9 @@ vnoremap ge G
 syntax on
 filetype plugin on
 
+set ttimeout
+set ttimeoutlen=100
+
 set omnifunc=syntaxcomplete#Complete
 set completeopt-=preview
 
