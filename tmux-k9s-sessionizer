@@ -3,17 +3,17 @@
 
 sesh=k9s
 
-tmux_running=(pgrep tmux)
+tmux_running="$(pgrep tmux)"
 
-if [ -z $TMUX ] && [ -z $tmux_running ]; then
-  tmux new-session -s $sesh -c $HOME -E "/opt/homebrew/bin/bash -c k9s"
+if [ -z "$TMUX" ] && [ -z "$tmux_running" ]; then
+  tmux new-session -s "$sesh" -c "$HOME" -E "/opt/homebrew/bin/bash -c k9s"
   exit 0
 fi
 
-if ! tmux has-session -t=$sesh 2>/dev/null; then
-  tmux new-session -ds $sesh -c $HOME -E "/opt/homebrew/bin/bash -c k9s"
+if ! tmux has-session -t "$sesh" 2> /dev/null; then
+  tmux new-session -ds "$sesh" -c "$HOME" -E "/opt/homebrew/bin/bash -c k9s"
 fi
 
-if ! tmux switch-client -t $sesh 2>/dev/null; then
-  tmux attach-session -t $sesh
+if ! tmux switch-client -t "$sesh" 2> /dev/null; then
+  tmux attach-session -t "$sesh"
 fi

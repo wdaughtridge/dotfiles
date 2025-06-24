@@ -7,7 +7,7 @@ if [ -f "$HOME/.bashrc" ]; then
 fi
 
 # Bash completion
-[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && source "/opt/homebrew/etc/profile.d/bash_completion.sh"
+[[ -r /opt/homebrew/etc/profile.d/bash_completion.sh ]] && source /opt/homebrew/etc/profile.d/bash_completion.sh
 
 # NVM
 function so_nvm() {
