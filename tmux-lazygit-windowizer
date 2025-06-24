@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# @location $HOME/.local/bin/tmux-lazygit-windowizer
+
+sesh="$(tmux display-message -p '#S')"
+
+tmux_running=(pgrep tmux)
+
+if [ -z $TMUX ] && [ -z $tmux_running ]; then
+  exit 1
+fi
+
+if ! tmux selectw -t=lazygit 2>/dev/null; then
+  tmux neww -t $sesh -n lazygit /opt/homebrew/bin/lazygit
+else
+  tmux selectw -t lazygit
+fi
