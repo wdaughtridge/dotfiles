@@ -32,6 +32,13 @@ vnoremap gl g$
 nnoremap ; <Esc>
 vnoremap ; <Esc>
 
+inoremap <C-f> <Right>
+inoremap <C-b> <Left>
+inoremap <C-p> <Up>
+inoremap <C-n> <Down>
+inoremap <C-e> <C-o>$
+inoremap <C-a> <C-o>0
+
 syntax on
 filetype plugin on
 
