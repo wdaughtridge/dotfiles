@@ -1,0 +1,9 @@
+# @location $HOME/.config/alacritty/alacritty.toml
+[window]
+dynamic_padding = true
+opacity = 0.8
+blur = true
+option_as_alt = "OnlyLeft"
+
+[font]
+size = 16.0

@@ -41,6 +41,8 @@ set ttimeoutlen=100
 set omnifunc=syntaxcomplete#Complete
 set completeopt-=preview
 
+set mouse=a
+
 set backspace=2
 set shiftround
 set autoindent
